@@ -1,0 +1,190 @@
+// bower:scss
+// endbower
+
+$breakpoint-tablet: 780px;
+$breakpoint-mobile: 420px;
+
+
+html, body {
+  width: 100%;
+  height: 100%;
+  background: #fafafa;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  color: #000;
+  margin: 0;
+}
+
+.main-container {
+  width: 100%;
+  height: 100%;
+  background: url('../images/background.jpg') no-repeat center top;
+  background-size: cover;
+}
+
+
+
+/* Hex Squares */
+
+#project-grid{
+  overflow: hidden;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+.clr:after{
+  content: "";
+  display: block;
+  clear: both;
+}
+#project-grid li{
+  position: relative;
+  list-style-type: none;
+  width: 100%; /* was previously (100-2.5) / 3.5 */
+  padding-bottom: 86.6%;/* =  width /0.866 */
+  float: left;
+  overflow: hidden;
+  visibility: hidden;
+
+  margin-right: 0%;
+
+  -webkit-transform:  rotate(60deg) skewX(30deg);
+  -ms-transform:  rotate(60deg) skewX(30deg);
+  transform: rotate(60deg) skewX(30deg);
+}
+
+#project-grid li *{
+  position: absolute;
+  visibility: visible;
+}
+#project-grid li > div{
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  color: #fff;
+  overflow: hidden;
+
+  -webkit-transform: skewX(-30deg) rotate(-60deg);
+  -ms-transform: skewX(-30deg) rotate(-60deg);
+  transform: skewX(-30deg) rotate(-60deg);
+
+  -webkit-backface-visibility: hidden;
+}
+
+/** MOBILE (Default) */
+
+#project-grid li:nth-child(n+1){
+  -webkit-transform: rotate(60deg) skewX(30deg);
+  -ms-transform: rotate(60deg) skewX(30deg);
+  transform: rotate(60deg) skewX(30deg);
+}
+
+
+/** DESKTOP Grid Layout */
+
+@media (min-width: $breakpoint-tablet) {
+
+  #project-grid li{
+    width: 25%; /* was previously (100-2.5) / 3.5 */
+    padding-bottom: 21.65%;/* =  width /0.866 */
+    margin-right: 12.5%;
+  }
+
+  #project-grid li:nth-child(5n+4), #project-grid li:nth-child(5n+5), #project-grid li:nth-child(5n+6){
+    margin-bottom: -21.6444%;
+  }
+
+  #project-grid li:nth-child(5n+3){
+    margin-right: 0;
+  }
+
+  #project-grid li:nth-child(5n+4), #project-grid li:nth-child(5n+5){
+    margin-left: 18.675%;
+    margin-right: -6.125%;
+
+    -webkit-transform: translateY(-50%) rotate(60deg) skewX(30deg);
+    -ms-transform: translateY(-50%) rotate(60deg) skewX(30deg);
+    transform: translateY(-50%) rotate(60deg) skewX(30deg);
+  }
+}
+
+/** TABLET Grid Layout */
+
+@media (max-width: $breakpoint-tablet) AND (min-width: $breakpoint-mobile) {
+
+  #project-grid li{
+    width: 40%; /* was previously (100-2.5) / 3.5 */
+    padding-bottom: 34.64%;/* =  width /0.866 */
+    margin-right: 0;
+  }
+
+  #project-grid li:nth-child(3n+1){
+    margin-right: 20%;
+  }
+
+  #project-grid li:nth-child(3n+3){
+
+    margin-left: 30%;
+    margin-bottom: -34.63%;
+
+    -webkit-transform: translateY(-50%) rotate(60deg) skewX(30deg);
+    -ms-transform: translateY(-50%) rotate(60deg) skewX(30deg);
+    transform: translateY(-50%) rotate(60deg) skewX(30deg);
+  }
+}
+
+
+/* HEX CONTENT */
+#project-grid li img{
+  left:-100%;
+  right:-100%;
+  width: 100%;
+  height: auto;
+  margin:0 auto;
+}
+
+#project-grid div h1, #project-grid div p{
+  width:90%;
+  padding:0 5%;
+  background-color:#008080; background-color: rgba(0, 128, 128, 0.8);
+  font-family:sans-serif;
+
+  -webkit-transition: top .2s ease-out, bottom .2s ease-out, .2s padding .2s ease-out;
+  -ms-transition: top .2s ease-out, bottom .2s ease-out, .2s padding .2s ease-out;
+  transition: top .2s ease-out, bottom .2s ease-out, .2s padding .2s ease-out;
+}
+#project-grid li h1{
+  bottom: 110%;
+  font-style: italic;
+  font-weight: normal;
+  font-size: 1.5em;
+  padding-top: 100%;
+  padding-bottom: 100%;
+}
+#project-grid li h1:after{
+  content: '';
+  display: block;
+  position: absolute;
+  bottom: -1px; left: 45%;
+  width: 10%;
+  text-align: center;
+  z-index: 1;
+  border-bottom: 2px solid #fff;
+}
+#project-grid li p{
+  padding-top: 50%;
+  top: 110%;
+  padding-bottom: 50%;
+}
+
+
+/* HOVER EFFECT  */
+
+#project-grid li div:hover h1 {
+  bottom: 50%;
+  padding-bottom: 0%;
+}
+
+#project-grid li div:hover p{
+  top: 50%;
+  padding-top: 0%;
+}
