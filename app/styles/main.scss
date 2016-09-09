@@ -21,8 +21,6 @@ html, body {
   background-size: cover;
 }
 
-
-
 /* Hex Squares */
 
 #project-grid{
@@ -72,7 +70,7 @@ html, body {
 
 /** MOBILE (Default) */
 
-#project-grid li:nth-child(n+1){
+#project-grid li:nth-child(n+1) {
   -webkit-transform: rotate(60deg) skewX(30deg);
   -ms-transform: rotate(60deg) skewX(30deg);
   transform: rotate(60deg) skewX(30deg);
@@ -89,15 +87,15 @@ html, body {
     margin-right: 12.5%;
   }
 
-  #project-grid li:nth-child(5n+4), #project-grid li:nth-child(5n+5), #project-grid li:nth-child(5n+6){
+  #project-grid li:nth-child(5n+4), #project-grid li:nth-child(5n+5), #project-grid li:nth-child(5n+6) {
     margin-bottom: -21.6444%;
   }
 
-  #project-grid li:nth-child(5n+3){
+  #project-grid li:nth-child(5n+3) {
     margin-right: 0;
   }
 
-  #project-grid li:nth-child(5n+4), #project-grid li:nth-child(5n+5){
+  #project-grid li:nth-child(5n+4), #project-grid li:nth-child(5n+5) {
     margin-left: 18.675%;
     margin-right: -6.125%;
 
@@ -117,11 +115,11 @@ html, body {
     margin-right: 0;
   }
 
-  #project-grid li:nth-child(3n+1){
+  #project-grid li:nth-child(3n+1) {
     margin-right: 20%;
   }
 
-  #project-grid li:nth-child(3n+3){
+  #project-grid li:nth-child(3n+3) {
 
     margin-left: 30%;
     margin-bottom: -34.63%;
