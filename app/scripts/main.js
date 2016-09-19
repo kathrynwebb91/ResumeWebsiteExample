@@ -6,7 +6,8 @@ $(document).ready(function() {
 
 		CLASSES: {
 			active: 'active',
-			hidden: 'hidden'
+			hidden: 'hidden',
+			hover: 'hover'
 		},
 
 		SELECTORS: {
@@ -29,6 +30,7 @@ $(document).ready(function() {
 				}
 			},
 			projects: {
+				'button-containers': '#project-grid li',
 				'button-id': 'project-button-',
 				'content-id': 'project-content-',
 				'allbuttons': '[id^=project-button-]',
@@ -50,7 +52,10 @@ $(document).ready(function() {
 		init: function() {
 
 			if (Modernizr.touch) {
+
 				this.clickevent = 'touchstart';
+				$(this.SELECTORS.projects['button-containers']).addClass(this.CLASSES.hover);
+
 			} else {
 				this.clickevent = 'click';
 			}
@@ -73,7 +78,13 @@ $(document).ready(function() {
 			//Set up click lsiteners for all project work buttons
 			$(this.SELECTORS.projects.allbuttons).on(this.clickevent, function(e){
 
-				var projectPageSelector = '#' + this.SELECTORS.projects['content-id'] + this.getProjectNumFromElement(e.target);
+				var projectPageSelector = '#' + this.SELECTORS.projects['content-id'];
+
+				$(e.target).parents().each(function (index, parent){
+					if ($(parent).hasClass('project-button')) {
+						projectPageSelector = projectPageSelector + this.getProjectNumFromElement(parent);
+					}
+				}.bind(this));
 
 				$(this.SELECTORS.pages.all).removeClass(this.CLASSES.active);
 				$(this.SELECTORS.pages['project-pages']).addClass(this.CLASSES.active);
@@ -87,7 +98,6 @@ $(document).ready(function() {
 
 			//Set up project nav buttons
 			$(this.SELECTORS.projects.nav.close).on(this.clickevent, function(){
-				console.log('close button clicked');
 				this.showPage('portfolio');
 			}.bind(this));
 
@@ -97,8 +107,6 @@ $(document).ready(function() {
 
 			$(this.SELECTORS.projects.nav.prev).on(this.clickevent, function(){
 
-				console.log('prev pressed');
-
 				var currentProjectContent = $(this.SELECTORS.projects.allcontent + '.' + this.CLASSES.active);
 				var currentProjectNum = this.getProjectNumFromElement(currentProjectContent[0]);
 				var newProjectNum = parseInt(currentProjectNum) - 1;
@@ -106,8 +114,6 @@ $(document).ready(function() {
 				if (newProjectNum < 0) {
 					newProjectNum = 0;
 				}
-
-				console.log('showing content ' + newProjectNum);
 
 				var projectPageSelector = '#' + this.SELECTORS.projects['content-id'] + newProjectNum;
 
@@ -118,8 +124,6 @@ $(document).ready(function() {
 
 			$(this.SELECTORS.projects.nav.next).on(this.clickevent, function(){
 
-				console.log('next pressed');
-
 				var currentProjectContent = $(this.SELECTORS.projects.allcontent + '.' + this.CLASSES.active);
 				var currentProjectNum = this.getProjectNumFromElement(currentProjectContent[0]);
 				var newProjectNum = parseInt(currentProjectNum) + 1;
@@ -127,8 +131,6 @@ $(document).ready(function() {
 				if (newProjectNum > $(this.SELECTORS.projects.allcontent).length - 1) {
 					newProjectNum = $(this.SELECTORS.projects.allcontent).length - 1;
 				}
-
-				console.log('showing content ' + newProjectNum);
 
 				var projectPageSelector = '#' + this.SELECTORS.projects['content-id'] + newProjectNum;
 

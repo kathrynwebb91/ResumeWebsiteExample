@@ -4,6 +4,7 @@
 $breakpoint-tablet: 780px;
 $breakpoint-mobile: 420px;
 
+$black: #222;
 $blue-accent: #c9f0f4;
 $grey-seperator: rgba(34,34,34,0.3);
 
@@ -31,8 +32,8 @@ html, body {
   height: 100%;
   background: #fafafa;
   font-family: 'BrandonGrotesque-Regular', Helvetica, Arial, sans-serif;
-  font-size: 8px;
-  color: #000;
+  font-size: 12px;
+  color: $black;
   margin: 0;
 }
 
@@ -53,8 +54,10 @@ span {
 }
 
 h1 {
+  margin: 40px 0;
   font-size: 300%;
-  border-bottom:1px solid black;
+  border-bottom:1px solid $black;
+  line-height: 100%;
 
   strong {
     display: inline-block;
@@ -64,6 +67,7 @@ h1 {
 
 h2 {
   position: relative;
+  margin: 20px 0;
   font-size: 150%;
   font-weight: normal;
 
@@ -75,7 +79,7 @@ h2 {
   li:before{
     display: block;
     position: absolute;
-    top: 50%;
+    top: 48%;
     content: '';
     width: 100%;
     border-bottom: 1px solid $grey-seperator;
@@ -87,7 +91,7 @@ h2 {
     &:before{
       display: block;
       position: absolute;
-      top: 50%;
+      top: 44%;
       content: '';
       width: 100%;
       border-bottom: 1px solid $grey-seperator;
@@ -111,6 +115,10 @@ h2 {
 
 h3 {
 
+    margin: 20px 0;
+    padding: 0 25px;
+    font-size: 100%;
+    font-weight: 400;
 
     li {
         display: inline-block;
@@ -193,6 +201,20 @@ h3 {
 
     }
 
+    &:hover {
+
+      color: white;
+
+      .hex div {
+        background: $black;
+      }
+
+      .arrow:after, .arrow:before {
+        background: white;
+      }
+
+    }
+
   }
 
   .nav-button:nth-child(n+2) {
@@ -236,9 +258,9 @@ h3 {
     -ms-transform:  rotate(60deg) skewX(30deg);
     transform: rotate(60deg) skewX(30deg);
 
-    transition: $hex-hover-anim-duration ease-in-out;
+    //transition: $hex-hover-anim-duration ease-in-out;
 
-    color: black;
+    color: $black;
 
   }
 
@@ -332,14 +354,14 @@ section {
 .resume .content,
 .project-info .content {
 
-    display: table-cell;
+  display: table-cell;
 
-    width: 100%;
-    padding: 5% 5% 10% 5%;
+  width: 100%;
+  padding: 5% 5% 10% 5%;
 
-    box-sizing: border-box;
+  box-sizing: border-box;
 
-    text-align: center;
+  text-align: center;
 
 
   ul {
@@ -361,6 +383,15 @@ section {
     margin: 25px 0 40px 0;
   }
 
+  .button:hover {
+    color: white;
+    .cross, .arrow {
+      &:before, &:after {
+        background: white;
+      }
+    }
+  }
+
   @media (min-width: $breakpoint-mobile) {
     padding: 0 20% 10% 20%;
 
@@ -379,12 +410,8 @@ section {
 
 .resume .content {
 
-  padding: 5% 5% 10% 5%;
+  padding: 30px 30px 10% 30px;
   vertical-align: top;
-
-  .summary {
-    padding: 0;
-  }
 
   h3 {
 
@@ -393,6 +420,11 @@ section {
         font-family: 'BrandonGrotesque-Bold', Helvetica, Arial, sans-serif;
       }
     }
+  }
+
+  > div {
+    margin-bottom: 40px;
+    padding: 0 50px;
   }
 
   @media (min-width: $breakpoint-tablet) {
@@ -404,22 +436,27 @@ section {
   }
 
   @media (min-width: $breakpoint-mobile) {
-    padding: 10% 20%;
+    padding: 15% 20%;
   }
 
 }
 
+.project-info .content .project-content > div:not(.img-container) {
+  margin-bottom: 40px;
+  padding: 0 50px;
+}
 
 .project-info {
 
   .project-nav {
-    position: absolute;
+    position: fixed;
     left: 0;
     width: 100%;
     display: none;
-    padding: 10%;
+    padding: 9% 10%;
     box-sizing: border-box;
     opacity: 0;
+    text-align: center;
     pointer-events: none;
   }
 
@@ -456,7 +493,7 @@ section {
         display: none;
         //padding: 0;
         opacity: 0;
-        margin: -10px 0 0 0;
+        margin: 0;
       }
   }
 
@@ -570,7 +607,7 @@ section {
 
   //transition: $hex-hover-anim-duration ease-in-out;
 
-  color: black;
+  color: $black;
 
 }
 
@@ -593,9 +630,9 @@ section {
   -webkit-backface-visibility: hidden;
 }
 
-#project-grid a * {
-  pointer-events: none; //TODO fix inner text hover states/ think of different approach
-}
+// #project-grid a * {
+//   pointer-events: none; //TODO fix inner text hover states/ think of different approach
+// }
 
 /** MOBILE (Default) */
 
@@ -687,7 +724,7 @@ section {
   filter: grayscale(100%);
   opacity: 0.3;
 
-  transition: $hex-hover-anim-duration ease-in-out;
+  //transition: $hex-hover-anim-duration ease-in-out;
 
   &.fill-width {
     width: 100%;
@@ -702,7 +739,7 @@ section {
 
 #project-grid .cross:before,
 #project-grid .cross:after{
-  transition: $hex-hover-anim-duration ease-in-out;
+  //transition: $hex-hover-anim-duration ease-in-out;
 }
 
 #project-grid li:hover{
@@ -761,7 +798,7 @@ section {
 .hextext.company {
 
   text-decoration: none;
-  font-style: none;
+  font-style: normal;
 
   .cross:before, .cross:after {
     width: 1px;
@@ -773,6 +810,7 @@ section {
   }
 
   strong.client {
+    letter-spacing: 1px;
     min-height: 0;
   }
 
@@ -801,6 +839,41 @@ section {
   }
 }
 
+#project-grid li.hover {
+
+  &:not(.light-bg-img) {
+    color: white;
+    .cross:before, .cross:after{
+      background-color: white;
+    }
+  }
+
+  img {
+    filter: grayscale(0);
+    opacity: 0.9;
+  }
+
+  .hextext.company {
+    strong.company {
+      opacity: 0;
+    }
+
+    strong.client {
+      overflow: hidden;
+      height: 0;
+    }
+
+    span {
+      display: block;
+    }
+
+    .cross:before, .cross:after {
+      width: 2px;
+    }
+  }
+}
+
+
 /* ICONS *******************************/
 
 /* Cross */
@@ -817,7 +890,7 @@ section {
   content: ' ';
   height: 44px;
   width: 1px;
-  background-color: #000;
+  background-color: $black;
   border-radius: 10px;
 }
 
@@ -831,28 +904,18 @@ section {
 .close.button {
 
   .cross {
-    width: 30px;
-    height: 30px;
+    width: 44px;
+    height: 44px;
   }
 
   .cross:before, .cross:after {
-    height: 30px;
+    height: 44px;
   }
 
   .cross:before, .cross:after {
     width: 2px;
   }
 
-  @media (min-width: $breakpoint-mobile){
-    .cross {
-      width: 44px;
-      height: 44px;
-    }
-
-    .cross:before, .cross:after {
-      height: 44px;
-    }
-  }
 }
 
 /* Arrow */
@@ -869,7 +932,7 @@ section {
   content: ' ';
   height: 22px;
   width: 2px;
-  background-color: #000;
+  background-color: $black;
   border-radius: 10px;
 }
 
