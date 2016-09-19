@@ -55,17 +55,87 @@ span {
 h1 {
   font-size: 300%;
   border-bottom:1px solid black;
+
+  strong {
+    display: inline-block;
+    white-space: nowrap;
+  }
 }
 
 h2 {
   position: relative;
   font-size: 150%;
+  font-weight: normal;
+
+  li {
+    position: relative;
+    width: 100%;
+  }
+
+  li:before{
+    display: block;
+    position: absolute;
+    top: 50%;
+    content: '';
+    width: 100%;
+    border-bottom: 1px solid $grey-seperator;
+  }
+
+
+  @media (min-width: $breakpoint-mobile) {
+
+    &:before{
+      display: block;
+      position: absolute;
+      top: 50%;
+      content: '';
+      width: 100%;
+      border-bottom: 1px solid $grey-seperator;
+    }
+
+    li {
+      display: inline-block;
+      width: auto;
+
+      &:after {
+        content: ' / ';
+        letter-spacing: 10px;
+      }
+
+      &:before {
+        content: none;
+      }
+    }
+  }
+}
+
+h3 {
+
+
+    li {
+        display: inline-block;
+        width: auto;
+
+        &:after {
+          content: ' / ';
+          letter-spacing: 5px;
+        }
+
+        &:before {
+          content: none;
+        }
+    }
+}
+
+.hidden {
+  opacity: 0;
 }
 
 .main-container {
-  position: absolute;
+  position: fixed;
   width: 100%;
   height: 100%;
+  overflow-y: scroll;
   background: url('../images/background.jpg') no-repeat center top;
   background-size: cover;
 }
@@ -83,7 +153,7 @@ h2 {
   text-align: center;
 
   pointer-events: none;
-  z-index: 10;
+  z-index: 8;
 
   .nav-button {
     position: relative;
@@ -93,7 +163,7 @@ h2 {
 
     pointer-events: all;
 
-    z-index: 10;
+    z-index: 8;
 
     .arrow {
       &:before {
@@ -106,7 +176,7 @@ h2 {
 
     &.active {
 
-      z-index: 9;
+      z-index: 7;
 
       .hex div {
         background: $blue-accent;
@@ -224,10 +294,25 @@ h2 {
 
 }
 
+.main-container[data-active-section='project'] .navigation,
+.main-container[data-active-section='resume'] .navigation {
+  display: none;
+}
+
+@media (min-width: $breakpoint-tablet) {
+
+  .main-container[data-active-section='project'] .navigation,
+  .main-container[data-active-section='resume'] .navigation {
+    display: inline-block;
+  }
+
+}
+
+
 /* PAGES ******************************/
 
 section {
-  position: absolute;
+  position: relative;
   top: 0;
   left: 0;
   display: none;
@@ -240,29 +325,22 @@ section {
 
 .active {
   display: block;
-  opacity:1;
-  z-index: 5;
+  opacity: 1 !important;
+  z-index: 3;
 }
 
-/* Resume */
+.resume .content,
+.project-info .content {
 
-.resume {
-  display: table;
-}
+    display: table-cell;
 
-.resume .content {
-  display: table-cell;
-  width: 100%;
-  padding: 0 5%;
+    width: 100%;
+    padding: 5% 5% 10% 5%;
 
-  vertical-align: middle;
-  box-sizing: border-box;
+    box-sizing: border-box;
 
-  text-align: center;
+    text-align: center;
 
-  .summary {
-    padding: 0;
-  }
 
   ul {
     list-style-type: none;
@@ -279,70 +357,36 @@ section {
 
   }
 
-  h1 strong {
-    white-space: nowrap;
+  .close.button {
+    margin: 25px 0 40px 0;
   }
 
-  h2 {
+  @media (min-width: $breakpoint-mobile) {
+    padding: 0 20% 10% 20%;
 
-    li {
-      position: relative;
-      width: 100%;
+    .summary {
+      padding: 0 80px;
     }
+  }
 
-    li:before{
-      display: block;
-      position: absolute;
-      top: 50%;
-      content: '';
-      width: 100%;
-      border-bottom: 1px solid $grey-seperator;
-    }
+}
 
+/* Resume */
 
-    @media (min-width: $breakpoint-mobile) {
+.resume.active {
+  display: table;
+}
 
-      &:before{
-        display: block;
-        position: absolute;
-        top: 50%;
-        content: '';
-        width: 100%;
-        border-bottom: 1px solid $grey-seperator;
-      }
+.resume .content {
 
-      li {
-        display: inline-block;
-        width: auto;
+  padding: 5% 5% 10% 5%;
+  vertical-align: top;
 
-        &:after {
-          content: ' / ';
-          letter-spacing: 10px;
-        }
-
-        &:before {
-          content: none;
-        }
-      }
-    }
-
+  .summary {
+    padding: 0;
   }
 
   h3 {
-
-    li {
-        display: inline-block;
-        width: auto;
-
-        &:after {
-          content: ' / ';
-          letter-spacing: 5px;
-        }
-
-        &:before {
-          content: none;
-        }
-    }
 
     &.clients {
       li {
@@ -351,14 +395,142 @@ section {
     }
   }
 
+  @media (min-width: $breakpoint-tablet) {
+    vertical-align: middle;
 
-  @media (min-width: $breakpoint-mobile) {
-    padding: 0 20%;
-    .summary {
-      padding: 0 80px;
+    .close.button {
+      display: none;
     }
   }
 
+  @media (min-width: $breakpoint-mobile) {
+    padding: 10% 20%;
+  }
+
+}
+
+
+.project-info {
+
+  .project-nav {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    display: none;
+    padding: 10%;
+    box-sizing: border-box;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .project-nav > div {
+      height: 50px;
+
+      &:nth-child(1) {
+        float:left;
+        * {
+          float:left;
+        }
+        span {
+          position: relative;
+          top: 34px;
+          left: -16px;
+          display: inline-block;
+        }
+      }
+
+      &:nth-child(2) {
+        float:right;
+        * {
+          float:right;
+        }
+        span {
+          position: relative;
+          top: 34px;
+          right: -16px;
+          display: inline-block;
+        }
+      }
+
+      &.close.button {
+        display: none;
+        //padding: 0;
+        opacity: 0;
+        margin: -10px 0 0 0;
+      }
+  }
+
+  .img-container {
+    img {
+      display: inline-block;
+      width: 100%;
+      float: left;
+    }
+  }
+
+  .project-content {
+    display: none;
+    opacity: 0;
+
+    &.active {
+      display: block;
+      opacity: 1;
+    }
+  }
+
+  .content .project-content > div {
+    display: inline-block;
+    margin: 1em 0;
+  }
+
+  @media (min-width: $breakpoint-tablet){
+
+    .project-nav {
+      display: block;
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .img-container {
+      .half-width {
+        width: 50%;
+      }
+    }
+
+    .project-nav > div.close.button {
+      display: inline-block;
+      width: 100px;
+      opacity: 1;
+    }
+
+    .content > .close.button {
+      opacity: 0;
+      padding: 15% 0 5% 0;
+      margin: 0;
+    }
+  }
+
+  @media (min-width: $breakpoint-mobile) AND (max-width: $breakpoint-tablet) {
+
+    .content .close.button{
+
+      padding: 20% 0 5% 0;
+      margin: 0 30%;
+      box-sizing: border-box;
+
+    }
+
+  }
+
+}
+
+.project-info.active {
+  .close.button {
+    z-index: 10;
+  }
+  .project-nav {
+    z-index: 8;
+  }
 }
 
 
@@ -369,6 +541,7 @@ section {
   width: 100%;
   height: 100%;
 }
+
 
 /* Portfolio grid */
 
@@ -420,6 +593,10 @@ section {
   -webkit-backface-visibility: hidden;
 }
 
+#project-grid a * {
+  pointer-events: none; //TODO fix inner text hover states/ think of different approach
+}
+
 /** MOBILE (Default) */
 
 #project-grid li:nth-child(n+1) {
@@ -438,7 +615,7 @@ section {
 
 @media (min-width: $breakpoint-tablet) {
 
-  #project-grid li{
+  #project-grid li {
     width: 25%; /* was previously (100-2.5) / 3.5 */
     padding-bottom: 21.65%;/* =  width /0.866 */
     margin-right: 12.5%;
@@ -651,6 +828,33 @@ section {
   transform: rotate(-45deg);
 }
 
+.close.button {
+
+  .cross {
+    width: 30px;
+    height: 30px;
+  }
+
+  .cross:before, .cross:after {
+    height: 30px;
+  }
+
+  .cross:before, .cross:after {
+    width: 2px;
+  }
+
+  @media (min-width: $breakpoint-mobile){
+    .cross {
+      width: 44px;
+      height: 44px;
+    }
+
+    .cross:before, .cross:after {
+      height: 44px;
+    }
+  }
+}
+
 /* Arrow */
 .arrow {
   position: relative;
@@ -692,4 +896,30 @@ section {
   &:after {
     transform: rotate(45deg);
   }
+}
+
+.arrow.left {
+  top: 11px;
+  left: -11px;
+  height: 22px;
+  &:before {
+    transform: rotate(-45deg);
+  }
+  &:after {
+    transform: rotate(45deg);
+  }
+  transform: rotate(-90deg);
+}
+
+.arrow.right {
+  top: 11px;
+  right: -11px;
+  height: 22px;
+  &:before {
+    transform: rotate(-45deg);
+  }
+  &:after {
+    transform: rotate(45deg);
+  }
+  transform: rotate(90deg);
 }
