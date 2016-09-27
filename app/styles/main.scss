@@ -377,7 +377,9 @@ section {
 .resume .content,
 .project-info .content {
 
-  display: table-cell;
+  display: inline-block;
+  height: 100%;
+  padding: 0%;
 
   width: 100%;
 
@@ -414,11 +416,37 @@ section {
     }
   }
 
-  @media (min-width: $breakpoint-mobile) {
-    padding: 0 20% 10% 20%;
+  .project-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: none;
+    padding: 9% 10%;
+    box-sizing: border-box;
+    opacity: 0;
+    text-align: center;
+    pointer-events: none;
+  }
 
+  .project-nav > div {
+      height: 50px;
+
+      &.close.button {
+        display: none;
+        //padding: 0;
+        opacity: 0;
+        margin: 0;
+      }
+  }
+
+  @media (min-width: $breakpoint-mobile) {
     .summary {
       padding: 0 80px;
+    }
+
+    .close.button {
+      margin: 0 auto;
     }
   }
 
@@ -430,12 +458,50 @@ section {
   display: inline-block;
 }
 
+.resume {
+    overflow-y: hidden;
+}
+
 .resume .content {
 
+  @media (min-width: $breakpoint-tablet){
+
+    margin-top: 16%;
+
+    .project-nav {
+      display: block;
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .project-nav > div.close.button {
+      display: inline-block;
+      opacity: 1;
+    }
+
+    > .close.button {
+      display: none;
+      opacity: 0;
+      padding: 15% 0 5% 0;
+      margin: 0;
+    }
+  }
+
+  @media (min-width: $breakpoint-mobile) AND (max-width: $breakpoint-tablet) {
+
+    .close.button {
+      padding: 15% 0 5% 0;
+      box-sizing: border-box;
+    }
+  }
+
+}
+
+.resume .content .resume-text{
+
   display: block;
-  height: 75%;
+  height: 70%;
   padding: 30px 30px 10% 30px;
-  margin-top: 150px;
   overflow-y: auto;
 
   h3 {
@@ -464,27 +530,17 @@ section {
       }
   }
 
-  > :last-child {
-    margin-bottom: 20% !important;
-  }
-
-  @media (min-width: $breakpoint-tablet) {
-    margin-top: 16%;
-
-    .close.button {
-      display: none;
-    }
-  }
-
   @media (min-width: $breakpoint-mobile) {
-    padding: 0 20%;
 
-    > div {
-      padding: 0 50px;
+    height: 50%;
+    padding: 0 20% 10% 20%;
+
+    .summary {
+      padding: 0 80px;
     }
 
-    .close-button-container {
-      width: 60%;
+    .close-button {
+      margin: 0 auto;
     }
   }
 
@@ -550,17 +606,18 @@ section {
       }
   }
 
-  .img-container {
-    img {
+  .img-container img,
+  iframe
+  {
       display: inline-block;
       width: 100%;
       float: left;
-    }
   }
+
 
   .project-content {
     display: none;
-    height: 80%;
+    height: 70%;
     padding: 0 20%;
 
     opacity: 0;
@@ -589,7 +646,7 @@ section {
       margin-top: 16%;
     }
 
-    .project-nav {
+    .content .project-nav {
       display: block;
       opacity: 1;
       pointer-events: all;
@@ -601,7 +658,7 @@ section {
       }
     }
 
-    .project-nav > div.close.button {
+    .content .project-nav > div.close.button {
       display: inline-block;
       opacity: 1;
     }
