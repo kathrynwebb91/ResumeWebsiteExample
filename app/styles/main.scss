@@ -30,6 +30,12 @@ $smallestmargin: 5px;
   url('../fonts/243743_1_0.ttf') format('truetype');
 }
 
+* {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 
 html, body {
   width: 100%;
@@ -396,7 +402,7 @@ section {
   }
 
   .close.button {
-    margin: 0 auto;
+    margin: 60px auto 0 auto;
   }
 
   .button:hover {
@@ -463,7 +469,7 @@ section {
   }
 
   @media (min-width: $breakpoint-tablet) {
-    margin-top: 20%;
+    margin-top: 16%;
 
     .close.button {
       display: none;
@@ -580,7 +586,7 @@ section {
   @media (min-width: $breakpoint-tablet){
 
     .project-content {
-      margin-top: 20%;
+      margin-top: 16%;
     }
 
     .project-nav {
