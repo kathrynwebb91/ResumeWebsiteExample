@@ -441,9 +441,13 @@ section {
       }
   }
 
+  @media (min-width: $breakpoint-desktop) {
+    margin-top: 14%;
+  }
+
   @media (min-width: $breakpoint-tablet){
 
-    margin-top: 16%;
+    margin-top: 20%;
 
     .project-nav {
       display: block;
@@ -521,6 +525,10 @@ section {
         width: 44px;
         display: inline-block;
       }
+  }
+
+  @media (min-width: $breakpoint-desktop) {
+    padding-top: 20px !important;
   }
 
   @media (min-width: $breakpoint-mobile) {
@@ -630,12 +638,13 @@ section {
     margin: 1em 0;
   }
 
+  @media (min-width: $breakpoint-desktop) {
+    .project-content {
+      padding-top: 20px;
+    }
+  }
 
   @media (min-width: $breakpoint-tablet){
-
-    .project-content {
-      margin-top: 16%;
-    }
 
     .img-container {
       .half-width {
