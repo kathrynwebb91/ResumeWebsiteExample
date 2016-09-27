@@ -442,12 +442,12 @@ section {
   }
 
   @media (min-width: $breakpoint-desktop) {
-    margin-top: 14%;
+    margin-top: 13% !important;
   }
 
   @media (min-width: $breakpoint-tablet){
 
-    margin-top: 20%;
+    margin-top: 16%;
 
     .project-nav {
       display: block;
@@ -640,7 +640,7 @@ section {
 
   @media (min-width: $breakpoint-desktop) {
     .project-content {
-      padding-top: 20px;
+      padding-top: 20px !important;
     }
   }
 
