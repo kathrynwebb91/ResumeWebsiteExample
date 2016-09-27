@@ -89,7 +89,7 @@ $(document).ready(function() {
 
 				$(e.target).parents().each(function (index, parent){
 					if ($(parent).hasClass('project-button')) {
-						projectPageSelector = projectPageSelector + this.getProjectNumFromElement(parent);
+						projectPageSelector = projectPageSelector + this.getProjectNumFromElement(this.SELECTORS.projects['button-id'],parent);
 					}
 				}.bind(this));
 
@@ -115,7 +115,7 @@ $(document).ready(function() {
 			$(this.SELECTORS.projects.nav.prev).on(this.clickevent, function(){
 
 				var currentProjectContent = $(this.SELECTORS.projects.allcontent + '.' + this.CLASSES.active);
-				var currentProjectNum = this.getProjectNumFromElement(currentProjectContent[0]);
+				var currentProjectNum = this.getProjectNumFromElement(this.SELECTORS.projects['content-id'],currentProjectContent[0]);
 				var newProjectNum = parseInt(currentProjectNum) - 1;
 
 				if (newProjectNum < 0) {
@@ -132,7 +132,7 @@ $(document).ready(function() {
 			$(this.SELECTORS.projects.nav.next).on(this.clickevent, function(){
 
 				var currentProjectContent = $(this.SELECTORS.projects.allcontent + '.' + this.CLASSES.active);
-				var currentProjectNum = this.getProjectNumFromElement(currentProjectContent[0]);
+				var currentProjectNum = this.getProjectNumFromElement(this.SELECTORS.projects['content-id'],currentProjectContent[0]);
 				var newProjectNum = parseInt(currentProjectNum) + 1;
 
 				if (newProjectNum > $(this.SELECTORS.projects.allcontent).length - 1) {
@@ -160,9 +160,9 @@ $(document).ready(function() {
 			$(this.SELECTORS.main).attr('data-active-section',pagename);
 		},
 
-		getProjectNumFromElement: function(element) {
+		getProjectNumFromElement: function(prefix, element) {
 			var id = element.getAttribute('id');
-			var projectnum = id.substring(id.length - 1, id.length);
+			var projectnum = id.replace(prefix, "");
 			return projectnum;
 		},
 
@@ -181,8 +181,7 @@ $(document).ready(function() {
 		},
 
 		setNavWidth: function(){
-			//$('.navigation').width($(document.body).width() - this.getScrollbarWidth());
-			//
+
 			if ($('section.active').get(0).scrollHeight > $(document.body).innerHeight()) {
 				$(this.SELECTORS.nav.container).width($(document.body).width() - this.getScrollbarWidth());
 			} else {
