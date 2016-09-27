@@ -76,10 +76,12 @@ $(document).ready(function() {
 
 			$(this.SELECTORS.nav.buttons.portfolio).on(this.clickevent, function(){
 				this.showPage('portfolio');
+				this.setNavWidth();
 			}.bind(this));
 
 			$(this.SELECTORS.nav.buttons.resume).on(this.clickevent, function(){
 				this.showPage('resume');
+				this.setNavWidth();
 			}.bind(this));
 
 			//Set up click lsiteners for all project work buttons
@@ -101,15 +103,19 @@ $(document).ready(function() {
 
 				$(this.SELECTORS.main).attr('data-active-section','project');
 
+				this.setNavWidth();
+
 			}.bind(this));
 
 			//Set up project nav buttons
 			$(this.SELECTORS.projects.nav.close).on(this.clickevent, function(){
 				this.showPage('portfolio');
+				this.setNavWidth();
 			}.bind(this));
 
 			$(this.SELECTORS.resume.nav.close).on(this.clickevent, function(){
 				this.showPage('portfolio');
+				this.setNavWidth();
 			}.bind(this));
 
 			$(this.SELECTORS.projects.nav.prev).on(this.clickevent, function(){
@@ -127,6 +133,8 @@ $(document).ready(function() {
 				$(this.SELECTORS.projects.allcontent).removeClass(this.CLASSES.active);
 				$(projectPageSelector).addClass(this.CLASSES.active);
 
+				this.setNavWidth();
+
 			}.bind(this));
 
 			$(this.SELECTORS.projects.nav.next).on(this.clickevent, function(){
@@ -143,6 +151,9 @@ $(document).ready(function() {
 
 				$(this.SELECTORS.projects.allcontent).removeClass(this.CLASSES.active);
 				$(projectPageSelector).addClass(this.CLASSES.active);
+
+				this.setNavWidth();
+
 			}.bind(this));
 
 
@@ -162,7 +173,7 @@ $(document).ready(function() {
 
 		getProjectNumFromElement: function(prefix, element) {
 			var id = element.getAttribute('id');
-			var projectnum = id.replace(prefix, "");
+			var projectnum = id.replace(prefix, '');
 			return projectnum;
 		},
 

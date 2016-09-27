@@ -1,6 +1,7 @@
 // bower:scss
 // endbower
 
+$breakpoint-desktop: 1080px;
 $breakpoint-tablet: 780px;
 $breakpoint-mobile: 420px;
 
@@ -365,7 +366,7 @@ section {
   opacity:0;
   z-index:2;
 
-  overflow-y: auto;
+  overflow-y: hidden;
 }
 
 .active {
@@ -440,30 +441,6 @@ section {
       }
   }
 
-  @media (min-width: $breakpoint-mobile) {
-    .summary {
-      padding: 0 80px;
-    }
-
-    .close.button {
-      margin: 0 auto;
-    }
-  }
-
-}
-
-/* Resume */
-
-.resume.active {
-  display: inline-block;
-}
-
-.resume {
-    overflow-y: hidden;
-}
-
-.resume .content {
-
   @media (min-width: $breakpoint-tablet){
 
     margin-top: 16%;
@@ -485,6 +462,10 @@ section {
       padding: 15% 0 5% 0;
       margin: 0;
     }
+
+    .summary {
+      padding: 0 80px;
+    }
   }
 
   @media (min-width: $breakpoint-mobile) AND (max-width: $breakpoint-tablet) {
@@ -495,6 +476,18 @@ section {
     }
   }
 
+  @media (min-width: $breakpoint-mobile) {
+    .close.button {
+      margin: 0 auto;
+    }
+  }
+
+}
+
+/* Resume */
+
+.resume.active {
+  display: inline-block;
 }
 
 .resume .content .resume-text{
@@ -548,8 +541,6 @@ section {
 
 
 .project-info {
-
-  overflow-y: hidden;
 
   .content {
     display: inline-block;
@@ -646,41 +637,14 @@ section {
       margin-top: 16%;
     }
 
-    .content .project-nav {
-      display: block;
-      opacity: 1;
-      pointer-events: all;
-    }
-
     .img-container {
       .half-width {
         width: 50%;
       }
     }
 
-    .content .project-nav > div.close.button {
-      display: inline-block;
-      opacity: 1;
-    }
-
-    .content > .close.button {
-      display: none;
-      opacity: 0;
-      padding: 15% 0 5% 0;
-      margin: 0;
-    }
   }
 
-  @media (min-width: $breakpoint-mobile) AND (max-width: $breakpoint-tablet) {
-
-    .content .close.button{
-
-      padding: 15% 0 5% 0;
-      box-sizing: border-box;
-
-    }
-
-  }
 
   @media (min-width: $breakpoint-mobile) {
     .content .project-content > div:not(.img-container) {
@@ -700,6 +664,10 @@ section {
   }
 }
 
+
+.portfolio {
+  overflow-y: auto;
+}
 
 .portfolio .content{
   position: absolute;
