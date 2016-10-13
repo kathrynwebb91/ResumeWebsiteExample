@@ -613,11 +613,15 @@ section {
       float: left;
   }
 
+  iframe {
+    height: auto // Set to precise height through js
+  }
+
 
   .project-content {
     display: none;
     height: 70%;
-    padding: 0 20%;
+    padding: 0 30px;
 
     opacity: 0;
 
@@ -656,6 +660,11 @@ section {
 
 
   @media (min-width: $breakpoint-mobile) {
+
+    .content .project-content {
+      padding: 0 20%;
+    }
+
     .content .project-content > div:not(.img-container) {
         margin-bottom: $bigmargin;
         padding: 0 50px;

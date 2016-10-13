@@ -57,12 +57,13 @@ $(document).ready(function() {
 
 			if (Modernizr.touch) {
 
-				this.clickevent = 'touchstart';
+				//this.clickevent = 'touchstart';
 				$(this.SELECTORS.projects['button-containers']).addClass(this.CLASSES.hover);
 
-			} else {
-				this.clickevent = 'click';
 			}
+			//} else {
+			this.clickevent = 'click';
+			//}
 
 			//this.setupSteppedScrolling();
 			this.setupEventListeners();
@@ -217,42 +218,9 @@ $(document).ready(function() {
 			document.body.removeChild(scrollDiv);
 
 			return scrollbarWidth;
-		},
-
-		onScroll: function(event){
-			// console.log(event);
-
-			// event.preventDefault();
-
-			// var scrollPosition = $(this.SELECTORS.main).scrollTop();
-			// var newScrollPosition = scrollPosition + this.stepsize;
-
-			// if (!this.scrolling) {
-			// 	$(this.SELECTORS.main).off('scroll');
-			// 	this.scrolling = true;
-			// 	console.log('scrolling, position:' + $(this.SELECTORS.main).scrollTop());
-
-			// 	$(this.SELECTORS.main).animate({ scrollTop : newScrollPosition + 'px' }, 1000, function(){
-			// 		this.scrolling = false;
-			// 		//if ($(this.SELECTORS.main).scrollTop() === newScrollPosition)
-			// 		setTimeout(function () {
-			// 			$(this.SELECTORS.main).on('scroll', this.onScroll.bind(this));
-			// 		}.bind(this),100);
-
-			// 	}.bind(this));
-			// }
-
-
-
-
-
-			// if ($(this.SELECTORS.main).scrollTop() > currentScrollTop) {
-			// 	scrollTo = currentScrollTop + this.stepsize;
-			// 	//scrollTo = Math.round(curScrollTop/this.stepsize) * this.stepsize;
-			// 	$(this.SELECTORS.main).animate({ scrollTop : scrollTo + 'px' });
-			// }
-			// currentScrollTop = $(this.SELECTORS.main).scrollTop();
 		}
+
+
 
 	}
 
