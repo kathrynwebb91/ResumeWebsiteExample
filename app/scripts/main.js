@@ -73,6 +73,10 @@ $(document).ready(function() {
 
 		setupEventListeners: function() {
 
+			$(document).on(this.clickevent,function() {
+				console.log('clikity clik');
+			});
+
 			// Set up click listeners for main navigation buttons
 
 			$(this.SELECTORS.nav.buttons.portfolio).on(this.clickevent, function(){
@@ -87,6 +91,8 @@ $(document).ready(function() {
 
 			//Set up click lsiteners for all project work buttons
 			$(this.SELECTORS.projects.allbuttons).on(this.clickevent, function(e){
+
+				console.log('opening project');
 
 				var projectPageSelector = '#' + this.SELECTORS.projects['content-id'];
 
@@ -185,7 +191,7 @@ $(document).ready(function() {
 
 		setupSteppedScrolling: function(){
 			this.stepsize = $('#' + this.SELECTORS.projects['button-id'] + '0').height();
-			console.log(this.stepsize);
+			//console.log(this.stepsize);
 			var scrollTo = 0;
 			var currentScrollTop = 0;
 
@@ -212,7 +218,6 @@ $(document).ready(function() {
 
 			// Get the scrollbar width
 			var scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;
-			console.warn(scrollbarWidth); // Mac:  15
 
 			// Delete the DIV
 			document.body.removeChild(scrollDiv);
