@@ -30,7 +30,8 @@ $(document).ready(function() {
 				'buttons': {
 					'portfolio':'.portfolio-button',
 					'resume':'.resume-button',
-					'all':'.nav-button'
+					'all':'.nav-button',
+          'labels': '.nav-button .nav-label'
 				}
 			},
 			projects: {
@@ -40,6 +41,7 @@ $(document).ready(function() {
 				'allbuttons': '[id^=project-button-]',
 				'allcontent': '[id^=project-content-]',
 				'nav': {
+          'container': '.project-nav',
 					'prev':'.project-nav .prev',
 					'next':'.project-nav .next',
 					'close':'.project-info .close',
@@ -52,6 +54,9 @@ $(document).ready(function() {
 				}
 			}
 		},
+
+    originalArrowSpacing: 0,
+    arrowScrollLimit: 0,
 
 		init: function() {
 
@@ -69,13 +74,10 @@ $(document).ready(function() {
 			this.setupEventListeners();
 
 			this.setNavWidth();
+
 		},
 
 		setupEventListeners: function() {
-
-			$(document).on(this.clickevent,function() {
-				console.log('clikity clik');
-			});
 
 			// Set up click listeners for main navigation buttons
 
@@ -92,7 +94,7 @@ $(document).ready(function() {
 			//Set up click lsiteners for all project work buttons
 			$(this.SELECTORS.projects.allbuttons).on(this.clickevent, function(e){
 
-				console.log('opening project');
+				//console.log('opening project');
 
 				var projectPageSelector = '#' + this.SELECTORS.projects['content-id'];
 
@@ -168,6 +170,20 @@ $(document).ready(function() {
 				this.setNavWidth();
 			}.bind(this));
 
+      //$(document).on('scroll', this.onScroll.bind(this));
+      //console.log('scroll call');
+      //
+      this.originalArrowSpacing = parseFloat($(this.SELECTORS.nav.buttons.labels).css('top'));
+      //
+      $('.portfolio').on('scroll', function() {
+        this.onScroll($('.portfolio'));
+      }.bind(this));
+
+      $(this.SELECTORS.projects.allcontent).on('scroll', function(e) {
+        //this.onScroll($(this.SELECTORS.projects.allcontent), $(this.SELECTORS.projects.nav.container));
+        this.onScroll($(e.target));
+      }.bind(this));
+
 		},
 
 		showPage: function (pagename) {
@@ -189,21 +205,24 @@ $(document).ready(function() {
 			hexesToBeSpaced.css('margin-bottom','-21.5%');
 		},
 
-		setupSteppedScrolling: function(){
-			this.stepsize = $('#' + this.SELECTORS.projects['button-id'] + '0').height();
-			//console.log(this.stepsize);
-			var scrollTo = 0;
-			var currentScrollTop = 0;
+		// setupSteppedScrolling: function(){
+		// 	this.stepsize = $('#' + this.SELECTORS.projects['button-id'] + '0').height();
+		// 	//console.log(this.stepsize);
+		// 	var scrollTo = 0;
+		// 	var currentScrollTop = 0;
 
-			$(this.SELECTORS.main).on('scroll', this.onScroll.bind(this));
-		},
+		// 	$(this.SELECTORS.main).on('scroll', this.onScroll.bind(this));
+		// },
 
 		setNavWidth: function(){
 
-			if ($('section.active').get(0).scrollHeight > $(document.body).innerHeight()) {
-				$(this.SELECTORS.nav.container).width($(document.body).width() - this.getScrollbarWidth());
+      var $doc = $(document.body);
+      var $container = $(this.SELECTORS.nav.container);
+
+			if ($('section.active').get(0).scrollHeight > $doc.innerHeight()) {
+				$container.width($doc.width() - this.getScrollbarWidth());
 			} else {
-				$(this.SELECTORS.nav.container).width($(document.body).width());
+				$container.width($doc.width());
 			}
 			// var newNavWidth = 'calc(' + $(this.SELECTORS.pages['project-page']).css('padding-right') + ' + ' + this.getScrollbarWidth() + 'px)';
 			// console.log(newNavWidth);
@@ -223,7 +242,92 @@ $(document).ready(function() {
 			document.body.removeChild(scrollDiv);
 
 			return scrollbarWidth;
-		}
+		},
+
+    updateCollapsableNav: function($element, $nav) {
+       //console.log("scrolling");
+      //console.log($element);
+
+      var $nav = $(this.SELECTORS.nav.container);
+      var $navControls = $(this.SELECTORS.projects.nav.container);
+
+
+      var stepsize = $(this.SELECTORS.nav.buttons.all).height() * 0.5;
+      var controlsStepsize = $(this.SELECTORS.nav.buttons.all).height() * 0.666;
+      var upperBorderSize = $(this.SELECTORS.nav.buttons.all).height() * (0.33/2); //starting top percentage/2 = ending top percentage
+      var newTop = $element.scrollTop();
+      //var arrowTopSpacing = parseFloat($(this.SELECTORS.nav.buttons.labels).css('top'));
+      //
+
+      console.log(controlsStepsize);
+
+      if (newTop > 0) {
+        if (!$nav.hasClass('minimising')) {
+          $nav.addClass('minimising');
+          $navControls.addClass('minimising');
+        }
+      } else {
+        $nav.removeClass('minimising');
+        $navControls.removeClass('minimising');
+      }
+
+      if (newTop < stepsize) {
+
+        $nav.removeClass('minimised');
+        $nav.css('top', -1 * newTop);
+
+        if (newTop > upperBorderSize) {
+          if (this.arrowScrollLimit == 0) {
+            console.log(newTop);
+            this.arrowScrollLimit = newTop;
+          }
+
+          $(this.SELECTORS.nav.buttons.labels).css('top', this.originalArrowSpacing + (newTop - this.arrowScrollLimit));
+
+        } else {
+
+          this.arrowScrollLimit = 0;
+          $(this.SELECTORS.nav.buttons.labels).css('top', this.originalArrowSpacing);
+
+        }
+
+        // if (newTop > controlsUpperBorderSize) {
+        //   if (this.controlsScrollLimit == 0) {
+        //     console.log(newTop);
+        //     this.controlsScrollLimit = newTop;
+        //   }
+
+        //   $(this.SELECTORS.projects.nav.container).css('top', this.originalControlsArrowSpacing + (newTop - this.controlsScrollLimit));
+
+        // } else {
+
+        //   this.controlsScrollLimit = 0;
+        //   $(this.SELECTORS.projects.nav.container).css('top', this.originalControlsArrowSpacing);
+
+        // }
+
+
+      } else {
+        if (!$nav.hasClass('minimised')) {
+          $nav.addClass('minimised');
+        }
+      }
+
+      if (newTop < controlsStepsize) {
+
+        $navControls.removeClass('minimised');
+        $navControls.css('top', -1 * newTop);
+
+      } else {
+        if (!$navControls.hasClass('minimised')) {
+          $navControls.addClass('minimised');
+        }
+      }
+    },
+
+    onScroll: function($element, $nav) {
+      this.updateCollapsableNav($element, $nav);
+    }
 
 
 

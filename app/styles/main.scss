@@ -31,6 +31,12 @@ $smallestmargin: 5px;
   url('../fonts/243743_1_0.ttf') format('truetype');
 }
 
+@keyframes fakeflip {
+    0%   {transform: rotateX(0deg);}
+    50%  {transform: rotateX(90deg);}
+    100% {transform: rotateX(0deg);}
+}
+
 * {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -183,6 +189,18 @@ h3 {
 
   pointer-events: none;
   z-index: 8;
+
+  &.minimised {
+    .nav-label {
+      top: 65%;
+    }
+  }
+
+  &.minimising {
+    .nav-label span {
+        opacity: 0;
+    }
+  }
 
   .nav-button {
     position: relative;
@@ -428,6 +446,19 @@ section {
     opacity: 0;
     text-align: center;
     pointer-events: none;
+
+    &.minimised {
+      .button {
+        top: 65%;
+      }
+    }
+
+    &.minimising {
+      .button span {
+          opacity: 0;
+      }
+    }
+
   }
 
   .project-nav > div {
@@ -858,7 +889,6 @@ section {
   opacity: 0.3;
 
   //transition: transform 3s ease-in-out;
-  //transform: rotateX(0deg);
 
   &.fill-width {
     width: 100%;
@@ -893,7 +923,10 @@ section {
   img {
     filter: grayscale(0);
     opacity: 0.9;
-    //transform: rotateX(359deg);
+    animation-timing-function: linear;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation: fakeflip 1s; /* Safari 4.0 - 8.0 */
+    animation: fakeflip 1s;
   }
 
 }
