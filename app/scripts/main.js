@@ -179,6 +179,11 @@ $(document).ready(function() {
         this.onScroll($('.portfolio'));
       }.bind(this));
 
+			$(this.SELECTORS.pages['resume-content']).on('scroll', function(e) {
+        //this.onScroll($(this.SELECTORS.projects.allcontent), $(this.SELECTORS.projects.nav.container));
+        this.onScroll($(e.target));
+      }.bind(this));
+
       $(this.SELECTORS.projects.allcontent).on('scroll', function(e) {
         //this.onScroll($(this.SELECTORS.projects.allcontent), $(this.SELECTORS.projects.nav.container));
         this.onScroll($(e.target));

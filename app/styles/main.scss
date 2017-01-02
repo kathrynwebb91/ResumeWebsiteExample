@@ -502,6 +502,9 @@ section {
       .button {
         top: 65%;
       }
+      .button span {
+          opacity: 0;
+      }
     }
 
     &.minimising {
@@ -524,12 +527,12 @@ section {
   }
 
   @media (min-width: $breakpoint-desktop) {
-    margin-top: 14% !important;
+    //margin-top: 14% !important;
   }
 
   @media (min-width: $breakpoint-tablet){
 
-    margin-top: 16%;
+    //margin-top: 16%;
 
     .project-nav {
       display: block;
@@ -576,10 +579,14 @@ section {
   display: inline-block;
 }
 
+.resume .content {
+  overflow: scroll;
+}
+
 .resume .content .resume-text{
 
   display: block;
-  height: 87%;
+  // height: 87%;
   padding: 30px 30px 10% 30px;
   overflow-y: auto;
 
@@ -609,14 +616,22 @@ section {
       }
   }
 
-  @media (min-width: $breakpoint-desktop) {
-    padding-top: 20px !important;
+  @media (min-width: $breakpoint-desktop){
+      padding: 16% 20% 10% 20%;
+  }
+
+
+  @media (min-width: $breakpoint-tablet) AND (max-width: $breakpoint-desktop){
+      padding: 20% 20% 10% 20%;
+  }
+
+  @media (min-width: $breakpoint-mobile) AND (max-width: $breakpoint-tablet) {
+      padding: 0% 20% 10% 20%;
   }
 
   @media (min-width: $breakpoint-mobile) {
 
-    height: 75%;
-    padding: 0 20% 10% 20%;
+    // height: 75%;
 
     .summary {
       padding: 0 80px;
@@ -726,13 +741,14 @@ section {
 
   @media (min-width: $breakpoint-desktop) {
     .project-content {
-      padding-top: 20px !important;
+      padding-top: 14% !important;
     }
   }
 
   @media (min-width: $breakpoint-tablet){
 
     .content .project-content {
+      padding-top: 20% !important;
       height: 87%;
     }
 
