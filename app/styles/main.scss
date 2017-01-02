@@ -32,9 +32,59 @@ $smallestmargin: 5px;
 }
 
 @keyframes fakeflip {
-    0%   {transform: rotateX(0deg);}
-    50%  {transform: rotateX(90deg);}
-    100% {transform: rotateX(0deg);}
+    0%   {transform: rotateX(0deg);filter: grayscale(100%); opacity: 0.3;}
+    49%  {transform: rotateX(90deg);filter: grayscale(100%); opacity: 0.3;}
+    50%  {transform: rotateX(90deg);filter: grayscale(0); opacity: 0.9;}
+    100% {transform: rotateX(0deg);filter: grayscale(0); opacity: 0.9;}
+}
+
+@keyframes fakefliptextsize {
+    0%   {transform: scaleY(1)}
+    49%  {transform: scaleY(0)}
+    50%  {transform: scaleY(0)}
+    100% {transform: scaleY(1)}
+}
+
+@keyframes fakefliptextcolor {
+    0%   {color: #222}
+    49%  {color: #222}
+    50%  {color: #FFF}
+    100% {color: #FFF}
+}
+
+@keyframes fakefliptextcross {
+    0%   {background-color: #222}
+    49%  {background-color: #222}
+    50%  {background-color: #FFF}
+    100% {background-color: #FFF}
+}
+
+@keyframes fakefliptextcontent {
+    0%   {transform: scaleY(1)}
+    49%  {transform: scaleY(0)}
+    50%  {transform: scaleY(0)}
+    100% {transform: scaleY(1)}
+}
+
+@keyframes fakefliptextcontentcompany {
+    0%  {opacity: 1}
+    49%  {opacity: 1}
+    50%  {opacity: 0}
+    100% {opacity: 0}
+}
+
+@keyframes fakefliptextcontentclient {
+    0%  {max-height: 200px}
+    49%  {max-height: 200px}
+    50%  {max-height: 0}
+    100% {max-height: 0}
+}
+
+@keyframes fakefliptextcontentproject {
+    0%   {max-height: 0}
+    49%   {max-height: 0}
+    50%   {max-height: 200px}
+    100%  {max-height: 200px}
 }
 
 * {
@@ -196,6 +246,7 @@ h3 {
     }
   }
 
+  &.minimised, 
   &.minimising {
     .nav-label span {
         opacity: 0;
@@ -907,26 +958,48 @@ section {
 }
 
 #project-grid .cross:before,
-#project-grid .cross:after{
+#project-grid .cross:after {
   //transition: $hex-hover-anim-duration ease-in-out;
 }
 
-#project-grid li:hover{
+#project-grid li:hover {
 
-  &:not(.light-bg-img) {
-    color: white;
-    .cross:before, .cross:after{
-      background-color: white;
-    }
+  img,
+  .hextext-inner,
+  .cross:before, 
+  .cross:after,
+  .hextext.company strong,
+  .hextext.company span {
+    animation-timing-function: linear;
+    -webkit-animation-timing-function: linear;
   }
 
   img {
-    filter: grayscale(0);
-    opacity: 0.9;
-    animation-timing-function: linear;
-    -webkit-animation-timing-function: linear;
     -webkit-animation: fakeflip 1s; /* Safari 4.0 - 8.0 */
     animation: fakeflip 1s;
+    transform: rotateX(0deg);
+    filter: grayscale(0); 
+    opacity: 0.9;
+  }
+
+  .hextext-inner {
+    -webkit-animation: fakefliptextsize 1s; /* Safari 4.0 - 8.0 */
+    animation: fakefliptextsize 1s;
+  }
+
+  &:not(.light-bg-img) {
+
+    .hextext-inner {
+      -webkit-animation: fakefliptextsize 1s, fakefliptextcolor 1s; /* Safari 4.0 - 8.0 */
+      animation: fakefliptextsize 1s, fakefliptextcolor 1s;
+      color: white;
+    }
+    //color: white;
+    .cross:before, .cross:after {
+      -webkit-animation: fakefliptextcross 1s; /* Safari 4.0 - 8.0 */
+      animation: fakefliptextcross 1s;
+      background-color: white;
+    }
   }
 
 }
@@ -979,7 +1052,9 @@ section {
 
   strong {
     opacity: 1;
+    overflow: hidden;
     height: auto;
+    max-height: 200px; // Set to allow height to go back to auto
   }
 
   strong.client {
@@ -988,22 +1063,34 @@ section {
   }
 
   span {
-    display: none;
+    overflow: hidden;
+    height: auto;
+    max-height: 0;
   }
 
   &:hover {
 
     strong.company {
+      //opacity: 0;
+      -webkit-animation: fakefliptextcontentcompany 1s; /* Safari 4.0 - 8.0 */
+      animation: fakefliptextcontentcompany 1s;
       opacity: 0;
     }
 
     strong.client {
-      overflow: hidden;
-      height: 0;
+      //overflow: hidden;
+      //max-height: 0;
+      -webkit-animation: fakefliptextcontentclient 1s; /* Safari 4.0 - 8.0 */
+      animation: fakefliptextcontentclient 1s;
+      max-height: 0;
     }
 
     span {
-      display: block;
+      // max-height: 1000px; // Set to allow height to go back to auto
+      // overflow: auto;
+      -webkit-animation: fakefliptextcontentproject 1s; /* Safari 4.0 - 8.0 */
+      animation: fakefliptextcontentproject 1s;
+      max-height: 200px;
     }
 
     .cross:before, .cross:after {
@@ -1012,39 +1099,6 @@ section {
   }
 }
 
-#project-grid li.hover {
-
-  &:not(.light-bg-img) {
-    color: white;
-    .cross:before, .cross:after{
-      background-color: white;
-    }
-  }
-
-  img {
-    filter: grayscale(0);
-    opacity: 0.9;
-  }
-
-  .hextext.company {
-    strong.company {
-      opacity: 0;
-    }
-
-    strong.client {
-      overflow: hidden;
-      height: 0;
-    }
-
-    span {
-      display: block;
-    }
-
-    .cross:before, .cross:after {
-      width: 2px;
-    }
-  }
-}
 
 
 /* ICONS *******************************/

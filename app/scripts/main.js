@@ -91,7 +91,7 @@ $(document).ready(function() {
 				this.setNavWidth();
 			}.bind(this));
 
-			//Set up click lsiteners for all project work buttons
+			//Set up click listeners for all project work buttons
 			$(this.SELECTORS.projects.allbuttons).on(this.clickevent, function(e){
 
 				//console.log('opening project');
@@ -259,7 +259,7 @@ $(document).ready(function() {
       //var arrowTopSpacing = parseFloat($(this.SELECTORS.nav.buttons.labels).css('top'));
       //
 
-      console.log(controlsStepsize);
+      //console.log(controlsStepsize);
 
       if (newTop > 0) {
         if (!$nav.hasClass('minimising')) {
@@ -311,6 +311,7 @@ $(document).ready(function() {
         if (!$nav.hasClass('minimised')) {
           $nav.addClass('minimised');
         }
+				$nav.removeClass('minimising');
       }
 
       if (newTop < controlsStepsize) {
@@ -322,6 +323,7 @@ $(document).ready(function() {
         if (!$navControls.hasClass('minimised')) {
           $navControls.addClass('minimised');
         }
+				$navControls.removeClass('minimising');
       }
     },
 
