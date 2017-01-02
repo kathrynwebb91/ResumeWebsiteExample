@@ -240,6 +240,10 @@ h3 {
   pointer-events: none;
   z-index: 8;
 
+  .nav-label span {
+    transition: opacity 0.5s;
+  }
+
   &.minimised {
     .nav-label {
       top: 65%;
@@ -497,6 +501,10 @@ section {
     opacity: 0;
     text-align: center;
     pointer-events: none;
+
+    .button span {
+      transition: opacity 0.5s;
+    }
 
     &.minimised {
       .button {

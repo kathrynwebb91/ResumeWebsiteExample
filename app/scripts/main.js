@@ -3,6 +3,7 @@ $(document).ready(function() {
 	var ScreenManager = {
 
 		clickevent: '',
+		scrollTarget: null,
 
 		// stepsize:0,
 		// scrolling: false,
@@ -84,11 +85,15 @@ $(document).ready(function() {
 			$(this.SELECTORS.nav.buttons.portfolio).on(this.clickevent, function(){
 				this.showPage('portfolio');
 				this.setNavWidth();
+				this.scrollTarget.scrollTop(0);
+				this.resetCollapsableNav(this.scrollTarget);
 			}.bind(this));
 
 			$(this.SELECTORS.nav.buttons.resume).on(this.clickevent, function(){
 				this.showPage('resume');
 				this.setNavWidth();
+				this.scrollTarget.scrollTop(0);
+				this.resetCollapsableNav(this.scrollTarget);
 			}.bind(this));
 
 			//Set up click listeners for all project work buttons
@@ -113,6 +118,8 @@ $(document).ready(function() {
 				$(this.SELECTORS.main).attr('data-active-section','project');
 
 				this.setNavWidth();
+				this.scrollTarget.scrollTop(0);
+				this.resetCollapsableNav(this.scrollTarget);
 
 			}.bind(this));
 
@@ -120,11 +127,15 @@ $(document).ready(function() {
 			$(this.SELECTORS.projects.nav.close).on(this.clickevent, function(){
 				this.showPage('portfolio');
 				this.setNavWidth();
+				this.scrollTarget.scrollTop(0);
+				this.resetCollapsableNav(this.scrollTarget);
 			}.bind(this));
 
 			$(this.SELECTORS.resume.nav.close).on(this.clickevent, function(){
 				this.showPage('portfolio');
 				this.setNavWidth();
+				this.scrollTarget.scrollTop(0);
+				this.resetCollapsableNav(this.scrollTarget);
 			}.bind(this));
 
 			$(this.SELECTORS.projects.nav.prev).on(this.clickevent, function(){
@@ -143,6 +154,8 @@ $(document).ready(function() {
 				$(projectPageSelector).addClass(this.CLASSES.active);
 
 				this.setNavWidth();
+				this.scrollTarget.scrollTop(0);
+				this.resetCollapsableNav(this.scrollTarget);
 
 			}.bind(this));
 
@@ -162,6 +175,8 @@ $(document).ready(function() {
 				$(projectPageSelector).addClass(this.CLASSES.active);
 
 				this.setNavWidth();
+				this.scrollTarget.scrollTop(0);
+				this.resetCollapsableNav(this.scrollTarget);
 
 			}.bind(this));
 
@@ -176,16 +191,19 @@ $(document).ready(function() {
       this.originalArrowSpacing = parseFloat($(this.SELECTORS.nav.buttons.labels).css('top'));
       //
       $('.portfolio').on('scroll', function() {
+				this.scrollTarget = $('.portfolio');
         this.onScroll($('.portfolio'));
       }.bind(this));
 
 			$(this.SELECTORS.pages['resume-content']).on('scroll', function(e) {
+				this.scrollTarget = $(e.target);
         //this.onScroll($(this.SELECTORS.projects.allcontent), $(this.SELECTORS.projects.nav.container));
         this.onScroll($(e.target));
       }.bind(this));
 
       $(this.SELECTORS.projects.allcontent).on('scroll', function(e) {
-        //this.onScroll($(this.SELECTORS.projects.allcontent), $(this.SELECTORS.projects.nav.container));
+        this.scrollTarget = $(e.target);
+				//this.onScroll($(this.SELECTORS.projects.allcontent), $(this.SELECTORS.projects.nav.container));
         this.onScroll($(e.target));
       }.bind(this));
 
@@ -249,7 +267,7 @@ $(document).ready(function() {
 			return scrollbarWidth;
 		},
 
-    updateCollapsableNav: function($element, $nav) {
+    updateCollapsableNav: function($element) {
        //console.log("scrolling");
       //console.log($element);
 
@@ -272,8 +290,8 @@ $(document).ready(function() {
           $navControls.addClass('minimising');
         }
       } else {
-        $nav.removeClass('minimising');
-        $navControls.removeClass('minimising');
+				this.resetCollapsableNav($element);
+				return;
       }
 
       if (newTop < stepsize) {
@@ -332,10 +350,23 @@ $(document).ready(function() {
       }
     },
 
-    onScroll: function($element, $nav) {
-      this.updateCollapsableNav($element, $nav);
-    }
+		resetCollapsableNav: function($element) {
 
+			  var $nav = $(this.SELECTORS.nav.container);
+      	var $navControls = $(this.SELECTORS.projects.nav.container);
+
+			  $nav.removeClass('minimising');
+        $navControls.removeClass('minimising');
+				$nav.removeClass('minimised');
+				$navControls.removeClass('minimised');
+				$navControls.css('top', '0');
+				$nav.css('top', '0');
+				$(this.SELECTORS.nav.buttons.labels).css('top', this.originalArrowSpacing);
+		},
+
+    onScroll: function($element) {
+      this.updateCollapsableNav($element);
+    }
 
 
 	}
