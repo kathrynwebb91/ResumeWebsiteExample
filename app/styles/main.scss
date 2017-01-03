@@ -999,29 +999,29 @@ section {
   }
 
   img {
-    -webkit-animation: fakeflip 1s; /* Safari 4.0 - 8.0 */
-    animation: fakeflip 1s;
+    -webkit-animation: fakeflip 0.2s; /* Safari 4.0 - 8.0 */
+    animation: fakeflip 0.2s;
     transform: rotateX(0deg);
     filter: grayscale(0); 
     opacity: 0.9;
   }
 
   .hextext-inner {
-    -webkit-animation: fakefliptextsize 1s; /* Safari 4.0 - 8.0 */
-    animation: fakefliptextsize 1s;
+    -webkit-animation: fakefliptextsize 0.2s; /* Safari 4.0 - 8.0 */
+    animation: fakefliptextsize 0.2s;
   }
 
   &:not(.light-bg-img) {
 
     .hextext-inner {
-      -webkit-animation: fakefliptextsize 1s, fakefliptextcolor 1s; /* Safari 4.0 - 8.0 */
-      animation: fakefliptextsize 1s, fakefliptextcolor 1s;
+      -webkit-animation: fakefliptextsize 0.2s, fakefliptextcolor 0.2s; /* Safari 4.0 - 8.0 */
+      animation: fakefliptextsize 0.2s, fakefliptextcolor 0.2s;
       color: white;
     }
     //color: white;
     .cross:before, .cross:after {
-      -webkit-animation: fakefliptextcross 1s; /* Safari 4.0 - 8.0 */
-      animation: fakefliptextcross 1s;
+      -webkit-animation: fakefliptextcross 0.2s; /* Safari 4.0 - 8.0 */
+      animation: fakefliptextcross 0.2s;
       background-color: white;
     }
   }
@@ -1096,24 +1096,24 @@ section {
 
     strong.company {
       //opacity: 0;
-      -webkit-animation: fakefliptextcontentcompany 1s; /* Safari 4.0 - 8.0 */
-      animation: fakefliptextcontentcompany 1s;
+      -webkit-animation: fakefliptextcontentcompany 0.2s; /* Safari 4.0 - 8.0 */
+      animation: fakefliptextcontentcompany 0.2s;
       opacity: 0;
     }
 
     strong.client {
       //overflow: hidden;
       //max-height: 0;
-      -webkit-animation: fakefliptextcontentclient 1s; /* Safari 4.0 - 8.0 */
-      animation: fakefliptextcontentclient 1s;
+      -webkit-animation: fakefliptextcontentclient 0.2s; /* Safari 4.0 - 8.0 */
+      animation: fakefliptextcontentclient 0.2s;
       max-height: 0;
     }
 
     span {
       // max-height: 1000px; // Set to allow height to go back to auto
       // overflow: auto;
-      -webkit-animation: fakefliptextcontentproject 1s; /* Safari 4.0 - 8.0 */
-      animation: fakefliptextcontentproject 1s;
+      -webkit-animation: fakefliptextcontentproject 0.2s; /* Safari 4.0 - 8.0 */
+      animation: fakefliptextcontentproject 0.2s;
       max-height: 200px;
     }
 
