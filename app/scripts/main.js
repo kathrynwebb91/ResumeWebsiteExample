@@ -280,9 +280,6 @@ $(document).ready(function() {
       var upperBorderSize = $(this.SELECTORS.nav.buttons.all).height() * (0.33/2); //starting top percentage/2 = ending top percentage
       var newTop = $element.scrollTop();
       //var arrowTopSpacing = parseFloat($(this.SELECTORS.nav.buttons.labels).css('top'));
-      //
-
-      //console.log(controlsStepsize);
 
       if (newTop > 0) {
         if (!$nav.hasClass('minimising')) {
@@ -294,11 +291,14 @@ $(document).ready(function() {
 				return;
       }
 
+			// Minimising nav
       if (newTop < stepsize) {
 
         $nav.removeClass('minimised');
         $nav.css('top', -1 * newTop);
 
+				// Main nav buttons arrow minimiser
+				// Arrows only start moving down when the have the desired margin above them (upperBorderSize)
         if (newTop > upperBorderSize) {
           if (this.arrowScrollLimit == 0) {
             console.log(newTop);
@@ -307,6 +307,7 @@ $(document).ready(function() {
 
           $(this.SELECTORS.nav.buttons.labels).css('top', this.originalArrowSpacing + (newTop - this.arrowScrollLimit));
 
+				// Do not move arrows down, allow them to move up page with scroll
         } else {
 
           this.arrowScrollLimit = 0;
@@ -314,40 +315,34 @@ $(document).ready(function() {
 
         }
 
-        // if (newTop > controlsUpperBorderSize) {
-        //   if (this.controlsScrollLimit == 0) {
-        //     console.log(newTop);
-        //     this.controlsScrollLimit = newTop;
-        //   }
-
-        //   $(this.SELECTORS.projects.nav.container).css('top', this.originalControlsArrowSpacing + (newTop - this.controlsScrollLimit));
-
-        // } else {
-
-        //   this.controlsScrollLimit = 0;
-        //   $(this.SELECTORS.projects.nav.container).css('top', this.originalControlsArrowSpacing);
-
-        // }
-
-
+			// Nav fully minimised
       } else {
+				// Button height: Set to fully minimised size
+				// Main nav buttons arrow minimiser: Set to final state
         if (!$nav.hasClass('minimised')) {
+					$nav.css('top', -1 * stepsize);
+					$(this.SELECTORS.nav.buttons.labels).css('top', this.originalArrowSpacing + (stepsize - upperBorderSize));
           $nav.addClass('minimised');
         }
 				$nav.removeClass('minimising');
       }
 
+			//Prev/Next Controls padding minimiser
       if (newTop < controlsStepsize) {
-
+				
         $navControls.removeClass('minimised');
         $navControls.css('top', -1 * newTop);
 
       } else {
+				// Minimising complete
+				// Set to fully minimised size
         if (!$navControls.hasClass('minimised')) {
+					$navControls.css('top', -1 * controlsStepsize);
           $navControls.addClass('minimised');
         }
 				$navControls.removeClass('minimising');
       }
+
     },
 
 		resetCollapsableNav: function($element) {

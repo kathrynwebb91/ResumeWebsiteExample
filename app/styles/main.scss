@@ -545,7 +545,9 @@ section {
     .project-nav {
       display: block;
       opacity: 1;
-      pointer-events: all;
+      >  * {
+          pointer-events: all;
+      }
     }
 
     .project-nav > div.close.button {
