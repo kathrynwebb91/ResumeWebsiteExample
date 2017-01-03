@@ -31,11 +31,19 @@ $smallestmargin: 5px;
   url('../fonts/243743_1_0.ttf') format('truetype');
 }
 
+// Hexagon Flipping animation
+// Forward flip (part 1) ************************* /
+
 @keyframes fakeflip {
     0%   {transform: rotateX(0deg);filter: grayscale(100%); opacity: 0.3;}
     49%  {transform: rotateX(90deg);filter: grayscale(100%); opacity: 0.3;}
     50%  {transform: rotateX(90deg);filter: grayscale(0); opacity: 0.9;}
     100% {transform: rotateX(0deg);filter: grayscale(0); opacity: 0.9;}
+}
+
+@keyframes fakeflipbackground {
+    0%   {background-color: rgba(0,0,0,0)}
+    99%  {background-color: rgba(0,0,0,0)}
 }
 
 @keyframes fakefliptextsize {
@@ -59,13 +67,6 @@ $smallestmargin: 5px;
     100% {background-color: #FFF}
 }
 
-@keyframes fakefliptextcontent {
-    0%   {transform: scaleY(1)}
-    49%  {transform: scaleY(0)}
-    50%  {transform: scaleY(0)}
-    100% {transform: scaleY(1)}
-}
-
 @keyframes fakefliptextcontentcompany {
     0%  {opacity: 1}
     49%  {opacity: 1}
@@ -86,6 +87,69 @@ $smallestmargin: 5px;
     50%   {max-height: 200px}
     100%  {max-height: 200px}
 }
+
+// **************************************************
+
+// Reverse "flip back" animation (Part 2) *********** /
+
+// Even "symmetrical" aniamtions need reverse counterpart 
+// so that the new animation is triggered when you stop hovering
+
+@keyframes fakeflipreverse {
+    100%   {transform: rotateX(0deg);filter: grayscale(100%); opacity: 0.3;}
+    50%  {transform: rotateX(90deg);filter: grayscale(100%); opacity: 0.3;}
+    49%  {transform: rotateX(90deg);filter: grayscale(0); opacity: 0.9;}
+    0% {transform: rotateX(0deg);filter: grayscale(0); opacity: 0.9;}
+}
+
+@keyframes fakeflipbackgroundreverse {
+    90%   {background-color: rgba(0,0,0,0)}
+    0%  {background-color: rgba(0,0,0,0)}
+}
+
+@keyframes fakefliptextsizereverse {
+    0%   {transform: scaleY(1)}
+    49%  {transform: scaleY(0)}
+    50%  {transform: scaleY(0)}
+    100% {transform: scaleY(1)}
+}
+
+@keyframes fakefliptextcolorreverse {
+    100%   {color: #222}
+    50%  {color: #222}
+    49%  {color: #FFF}
+    0% {color: #FFF}
+}
+
+@keyframes fakefliptextcrossreverse {
+    100%   {background-color: #222}
+    50%  {background-color: #222}
+    49%  {background-color: #FFF}
+    0% {background-color: #FFF}
+}
+
+@keyframes fakefliptextcontentcompanyreverse {
+    100%  {opacity: 1}
+    50%  {opacity: 1}
+    49%  {opacity: 0}
+    0% {opacity: 0}
+}
+
+@keyframes fakefliptextcontentclientreverse {
+    100%  {max-height: 200px}
+    50%  {max-height: 200px}
+    49%  {max-height: 0}
+    0% {max-height: 0}
+}
+
+@keyframes fakefliptextcontentprojectreverse {
+    100%   {max-height: 0}
+    50%   {max-height: 0}
+    49%   {max-height: 200px}
+    0%  {max-height: 200px}
+}
+
+//***************************
 
 * {
   text-rendering: optimizeLegibility;
@@ -534,13 +598,7 @@ section {
       }
   }
 
-  @media (min-width: $breakpoint-desktop) {
-    //margin-top: 14% !important;
-  }
-
   @media (min-width: $breakpoint-tablet){
-
-    //margin-top: 16%;
 
     .project-nav {
       display: block;
@@ -758,7 +816,7 @@ section {
   @media (min-width: $breakpoint-tablet){
 
     .content .project-content {
-      padding-top: 20% !important;
+      padding-top: 16% !important;
       height: 87%;
     }
 
@@ -838,14 +896,42 @@ section {
   -ms-transform:  rotate(60deg) skewX(30deg);
   transform: rotate(60deg) skewX(30deg);
 
-  //transition: $hex-hover-anim-duration ease-in-out;
-
   color: $black;
+
+  a {
+    -webkit-animation: fakeflipbackground 0.2s; /* Safari 4.0 - 8.0 */
+    animation: fakeflipbackground 0.2s;
+  }
+
+  img {
+    -webkit-animation: fakeflipreverse 0.2s; /* Safari 4.0 - 8.0 */
+    animation: fakeflipreverse 0.2s;
+  }
+
+  .hextext-inner {
+    -webkit-animation: fakefliptextsizereverse 0.2s; /* Safari 4.0 - 8.0 */
+    animation: fakefliptextsizereverse 0.2s;
+  }
+
+  &:not(.light-bg-img) {
+
+    .hextext-inner {
+      -webkit-animation: fakefliptextsizereverse 0.2s, fakefliptextcolorreverse 0.2s; /* Safari 4.0 - 8.0 */
+      animation: fakefliptextsizereverse 0.2s, fakefliptextcolorreverse 0.2s;
+    }
+    //color: white;
+    .cross:before, .cross:after {
+      -webkit-animation: fakefliptextcrossreverse 0.2s; /* Safari 4.0 - 8.0 */
+      animation: fakefliptextcrossreverse 0.2s;
+    }
+  }
 
 }
 
 #project-grid li * {
   visibility: visible;
+  animation-timing-function: linear;
+  -webkit-animation-timing-function: linear;
 }
 #project-grid li > a{
   position: absolute;
@@ -965,8 +1051,6 @@ section {
   filter: grayscale(100%);
   opacity: 0.3;
 
-  //transition: transform 3s ease-in-out;
-
   &.fill-width {
     width: 100%;
     height: auto;
@@ -983,21 +1067,11 @@ section {
 
 }
 
-#project-grid .cross:before,
-#project-grid .cross:after {
-  //transition: $hex-hover-anim-duration ease-in-out;
-}
-
 #project-grid li:hover {
 
-  img,
-  .hextext-inner,
-  .cross:before, 
-  .cross:after,
-  .hextext.company strong,
-  .hextext.company span {
-    animation-timing-function: linear;
-    -webkit-animation-timing-function: linear;
+  a {
+    -webkit-animation: fakeflipbackgroundreverse 0.2s; /* Safari 4.0 - 8.0 */
+    animation: fakeflipbackgroundreverse 0.2s;
   }
 
   img {
@@ -1072,6 +1146,11 @@ section {
   text-decoration: none;
   font-style: normal;
 
+  // * {
+  //   -webkit-animation-direction: reverse; /* Safari 4.0 - 8.0 */
+  //   animation-direction: reverse;
+  // }
+
   .cross:before, .cross:after {
     width: 1px;
   }
@@ -1083,12 +1162,21 @@ section {
     max-height: 200px; // Set to allow height to go back to auto
   }
 
+  strong.company {
+    -webkit-animation: fakefliptextcontentcompanyreverse 0.2s; /* Safari 4.0 - 8.0 */
+    animation: fakefliptextcontentcompanyreverse 0.2s;
+  }
+
   strong.client {
+    -webkit-animation: fakefliptextcontentclientreverse 0.2s; /* Safari 4.0 - 8.0 */
+    animation: fakefliptextcontentclientreverse 0.2s;
     letter-spacing: 1px;
     min-height: 0;
   }
 
   span {
+    -webkit-animation: fakefliptextcontentprojectreverse 0.2s; /* Safari 4.0 - 8.0 */
+    animation: fakefliptextcontentprojectreverse 0.2s;
     overflow: hidden;
     height: auto;
     max-height: 0;
@@ -1096,24 +1184,24 @@ section {
 
   &:hover {
 
+    * {
+      -webkit-animation-direction: normal; /* Safari 4.0 - 8.0 */
+      animation-direction: normal;
+    }
+
     strong.company {
-      //opacity: 0;
       -webkit-animation: fakefliptextcontentcompany 0.2s; /* Safari 4.0 - 8.0 */
       animation: fakefliptextcontentcompany 0.2s;
       opacity: 0;
     }
 
     strong.client {
-      //overflow: hidden;
-      //max-height: 0;
       -webkit-animation: fakefliptextcontentclient 0.2s; /* Safari 4.0 - 8.0 */
       animation: fakefliptextcontentclient 0.2s;
       max-height: 0;
     }
 
     span {
-      // max-height: 1000px; // Set to allow height to go back to auto
-      // overflow: auto;
       -webkit-animation: fakefliptextcontentproject 0.2s; /* Safari 4.0 - 8.0 */
       animation: fakefliptextcontentproject 0.2s;
       max-height: 200px;
