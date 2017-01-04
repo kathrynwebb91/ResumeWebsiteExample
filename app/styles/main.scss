@@ -841,7 +841,7 @@ section {
     }
 
     .content .project-content > div:not(.img-container) {
-        margin-bottom: $bigmargin;
+        //margin-bottom: $bigmargin;
         padding: 0 50px;
     }
   }
@@ -1341,4 +1341,12 @@ section {
   overflow: scroll;
   position: absolute;
   top: -9999px;
+}
+
+.line {
+  display: block !important;
+  border-bottom: 1px solid #222;
+  width: 100%;
+  padding: 0 !important;
+  margin: $smallmargin 0 !important;
 }
