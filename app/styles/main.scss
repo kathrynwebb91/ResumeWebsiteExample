@@ -802,7 +802,8 @@ section {
     }
   }
 
-  .content .project-content > div {
+  .content .project-content > div,
+  .content .project-content > iframe {
     display: inline-block;
     margin: 1em 0;
   }
@@ -826,6 +827,10 @@ section {
       }
     }
 
+   .content .project-content > div:not(.img-container){
+        padding: 0 100px !important;
+    }
+
   }
 
 
@@ -840,7 +845,7 @@ section {
       padding: 0 20%;
     }
 
-    .content .project-content > div:not(.img-container) {
+    .content .project-content > div:not(.img-container){
         //margin-bottom: $bigmargin;
         padding: 0 50px;
     }
