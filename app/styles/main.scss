@@ -163,7 +163,7 @@ html, body {
   height: 100%;
   background: #fafafa;
   font-family: 'BrandonGrotesque-Regular', Helvetica, Arial, sans-serif;
-  font-size: 12px;
+  font-size: 15px;
   color: $black;
   margin: 0;
 }
@@ -281,6 +281,33 @@ h3 {
   opacity: 0;
 }
 
+.loaded .loading-screen {
+  background: rgba(0,0,0,0);
+  pointer-events: none;
+
+  * {
+    display: none;
+    pointer-events: none;
+  }
+}
+
+.loading-screen{
+  color: white;
+  display: table;
+  position:absolute;
+  width: 100%;
+  height:100%;
+  background: black;
+  z-index: 20;
+  text-align: center;
+  transition: background-color 1s;
+
+  span {
+    display: table-cell;
+    vertical-align: middle;
+  }
+}
+
 .main-container {
   position: fixed;
   width: 100%;
@@ -303,10 +330,6 @@ h3 {
 
   pointer-events: none;
   z-index: 8;
-
-  .nav-label span {
-    transition: opacity 0.5s;
-  }
 
   &.minimised {
     .nav-label {
@@ -447,7 +470,7 @@ h3 {
       position: relative;
       left: auto;
       top: auto;
-      margin-left: -40.4%;
+      margin-left: -40.6%;
     }
   }
 
@@ -461,7 +484,7 @@ h3 {
     }
 
     .nav-button:nth-child(1){
-      margin-right: 12.2%;
+      margin-right: 12.4%;
     }
 
     .nav-button:last-child{
@@ -565,10 +588,6 @@ section {
     opacity: 0;
     text-align: center;
     pointer-events: none;
-
-    .button span {
-      transition: opacity 0.5s;
-    }
 
     &.minimised {
       .button {
@@ -978,7 +997,7 @@ section {
 
   #project-grid li {
     width: 25%; /* was previously (100-2.5) / 3.5 */
-    padding-bottom: 21.65%;/* =  width /0.866 */
+    padding-bottom: 21.6%;/* =  width /0.866 */
     margin-right: 12.5%;
   }
 
@@ -991,7 +1010,7 @@ section {
   }
 
   #project-grid li:nth-child(5n+5), #project-grid li:nth-child(5n+6) {
-    margin-left: 18.675%;
+    margin-left: 18.7%;
     margin-right: -6.125%;
 
     -webkit-transform: translateY(-50%) rotate(60deg) skewX(30deg);
