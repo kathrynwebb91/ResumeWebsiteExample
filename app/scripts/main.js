@@ -58,6 +58,8 @@ $(document).ready(function() {
 
     originalArrowSpacing: 0,
     arrowScrollLimit: 0,
+		imagesloadedCount: 0,
+		numberOfImages: 0,
 
 		init: function() {
 
@@ -76,8 +78,14 @@ $(document).ready(function() {
 
 			this.setNavWidth();
 
-			$('body').waitForImages(function(){
+			$('body').waitForImages(function() {
+				// All images loaded
 				$('body').addClass('loaded');
+				$('.loading-hex .hexagon.inner').css('height', '0');
+			}, function(loaded, count, success) {
+				// {count} out of {loaded} images loaded
+				var newHeight = 93.6 - (93.6 * (loaded/count));
+				$('.loading-hex .hexagon.inner').css('height', newHeight);
 			});
 
 		},

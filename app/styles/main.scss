@@ -291,21 +291,91 @@ h3 {
   }
 }
 
-.loading-screen{
+
+.loading-screen {
   color: white;
-  display: table;
-  position:absolute;
+  //display: table;
+  display: block;
+  position: absolute;
   width: 100%;
   height:100%;
-  background: black;
+  background: $black;
   z-index: 20;
   text-align: center;
-  transition: background-color 1s;
+  transition: background-color 2s;
 
   span {
     display: table-cell;
     vertical-align: middle;
   }
+
+  .loading-hex {
+    display:  inline-block;
+    position: relative;
+    top: 50%;
+    margin-top: -54px;
+    transform: rotateX(-180deg);
+
+    .hexagon {
+      display: inline-block;
+      overflow: hidden;
+      position: relative;
+      right: -60px;
+
+      &.inner {
+        width: 108px;
+        //transform-origin: 52px 30px;
+        transform: rotateX(-180deg);
+        //transform: scale(0.9);
+        left: -64px;
+        right: auto;
+        margin: 5.2px 6px;
+
+        div:first-child {
+          border-right-color: $black;
+          border-right-width: 27px;
+          border-top-width: 47px;
+          border-bottom-width: 47px;
+        }
+        div:nth-child(2) {
+          background-color: $black;
+          width: 54px;
+          height: 93.6px;
+        }
+        div:last-child{
+          border-left-color: $black;
+          border-left-width: 27px;
+          border-top-width: 47px;
+          border-bottom-width: 47px;
+        }
+      }
+
+    }
+  }
+
+  .hexagon {
+    div:first-child {
+      float: left;
+      border-right: 30px solid white;
+      border-top: 52px solid transparent;
+      border-bottom: 52px solid transparent;
+    }
+
+    div:nth-child(2) {
+      float: left;
+      width: 60px;
+      height: 104px;
+      background-color: white;
+    }
+
+    div:last-child {
+      float: left;
+      border-left: 30px solid white;
+      border-top: 52px solid transparent;
+      border-bottom: 52px solid transparent;
+    }
+  }
+
 }
 
 .main-container {
@@ -841,12 +911,13 @@ section {
     }
 
     .img-container {
+      width: 100%;
       .half-width {
         width: 50%;
       }
     }
 
-   .content .project-content > div:not(.img-container){
+   .content .project-content > div:not(.img-container):not(.line){
         padding: 0 100px !important;
     }
 
