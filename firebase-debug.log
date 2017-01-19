@@ -1,0 +1,17 @@
+[debug] ----------------------------------------------------------------------
+[debug] Command:      /Users/kathryn.webb/.nvm/versions/node/v4.2.1/bin/node /usr/local/bin/firebase deploy
+[debug] Platform:     darwin
+[debug] Node Version: v4.2.1
+[debug] Time:         Thu Jan 19 2017 07:40:03 GMT-0500 (EST)
+[debug] ----------------------------------------------------------------------
+[debug] 
+[debug] >>> HTTP REQUEST GET https://admin.firebase.com/firebase/hassrauf/token?token=XXX 
+[debug] <<< HTTP RESPONSE 200
+[debug] >>> HTTP REQUEST GET https://admin.firebase.com/firebase/hassrauf/token?token=XXX 
+[debug] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'hassrauf'...
+[info] 
+[info] i  deploying hosting
+[info] i  preparing dist directory for upload...
+[debug] >>> HTTP REQUEST PUT https://deploy.firebase.com/firebase/hassrauf/uploads/-KaqjQ1rZu9MkQ1nV14-?token=XXX&fileCount=59&message= 
