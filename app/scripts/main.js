@@ -271,7 +271,7 @@ $(document).ready(function() {
 			document.body.appendChild(scrollDiv);
 
 			// Get the scrollbar width
-			var scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth + 2;// +2 to try to fix spacing errors in chrome
+			var scrollbarWidth = scrollDiv.offsetWidth - scrollDiv.clientWidth;// +2 to try to fix spacing errors in chrome
 
 			// Delete the DIV
 			document.body.removeChild(scrollDiv);
@@ -373,7 +373,11 @@ $(document).ready(function() {
 
     onScroll: function($element) {
       this.updateCollapsableNav($element);
-    }
+    },
+
+		setHexSpacing: function () {
+			
+		}
 
 	}
 
