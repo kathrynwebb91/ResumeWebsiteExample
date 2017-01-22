@@ -197,6 +197,10 @@ $(document).ready(function() {
 
 			$( window ).resize(function() {
 				this.setNavWidth();
+				this.originalArrowSpacing = parseFloat($(this.SELECTORS.nav.buttons.labels).css('top'));
+				if (this.scrollTarget != null) {
+					this.onScroll(this.scrollTarget);
+				}
 			}.bind(this));
 
       //$(document).on('scroll', this.onScroll.bind(this));
@@ -370,7 +374,8 @@ $(document).ready(function() {
 				$navControls.removeClass('minimised');
 				$navControls.css('top', '0');
 				$nav.css('top', '0');
-				$(this.SELECTORS.nav.buttons.labels).css('top', this.originalArrowSpacing);
+				//$(this.SELECTORS.nav.buttons.labels).css('top', this.originalArrowSpacing);
+				$(this.SELECTORS.nav.buttons.labels).css('top', '33%');
 		},
 
     onScroll: function($element) {
@@ -380,9 +385,9 @@ $(document).ready(function() {
 		// Hack to make the spacing work in safari due to the lack of subpixel rendering
 		setHexSpacing: function () {
 			if (navigator.userAgent.indexOf('Safari/') != -1 && navigator.userAgent.indexOf('Chromium/') == -1 && navigator.userAgent.indexOf('Chrome') == -1){
-				var rule  = "@media (min-width: 780px) { #project-grid li {padding-bottom: 21.6% !important;}}";
-				rule += "@media (min-width: 780px) {#project-grid li:nth-child(5n+5), #project-grid li:nth-child(5n+6), #project-grid li:nth-child(5n+7) {margin-bottom: -21.4% !important;}}";
-				rule += "@media (min-width: 1000px) {#project-grid li:nth-child(5n+5), #project-grid li:nth-child(5n+6), #project-grid li:nth-child(5n+7) {margin-bottom: -21.5% !important;}}";
+				var rule  = '@media (min-width: 780px) { #project-grid li {padding-bottom: 21.6% !important;}}';
+				rule += '@media (min-width: 780px) {#project-grid li:nth-child(5n+5), #project-grid li:nth-child(5n+6), #project-grid li:nth-child(5n+7) {margin-bottom: -21.4% !important;}}';
+				rule += '@media (min-width: 1000px) {#project-grid li:nth-child(5n+5), #project-grid li:nth-child(5n+6), #project-grid li:nth-child(5n+7) {margin-bottom: -21.5% !important;}}';
 
 				cssEngine(rule);
 			}
@@ -400,5 +405,5 @@ function cssEngine(rule) {
   css.type = 'text/css'; // Specifies the type
   if (css.styleSheet) css.styleSheet.cssText = rule; // Support for IE
   else css.appendChild(document.createTextNode(rule)); // Support for the rest
-  document.getElementsByTagName("head")[0].appendChild(css); // Specifies where to place the css
+  document.getElementsByTagName('head')[0].appendChild(css); // Specifies where to place the css
 }
