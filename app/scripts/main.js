@@ -88,6 +88,8 @@ $(document).ready(function() {
 				$('.loading-hex .hexagon.inner').css('height', newHeight);
 			});
 
+			this.setHexSpacing();
+
 		},
 
 		setupEventListeners: function() {
@@ -375,14 +377,28 @@ $(document).ready(function() {
       this.updateCollapsableNav($element);
     },
 
+		// Hack to make the spacing work in safari due to the lack of subpixel rendering
 		setHexSpacing: function () {
-			
+			if (navigator.userAgent.indexOf('Safari/') != -1 && navigator.userAgent.indexOf('Chromium/') == -1 && navigator.userAgent.indexOf('Chrome') == -1){
+				var rule  = "@media (min-width: 780px) { #project-grid li {padding-bottom: 21.6% !important;}}";
+				rule += "@media (min-width: 780px) {#project-grid li:nth-child(5n+5), #project-grid li:nth-child(5n+6), #project-grid li:nth-child(5n+7) {margin-bottom: -21.4% !important;}}";
+				rule += "@media (min-width: 1000px) {#project-grid li:nth-child(5n+5), #project-grid li:nth-child(5n+6), #project-grid li:nth-child(5n+7) {margin-bottom: -21.5% !important;}}";
+
+				cssEngine(rule);
+			}
+
 		}
 
 	}
-
 
 	ScreenManager.init();
 
 });
 
+function cssEngine(rule) {
+  var css = document.createElement('style'); // Creates <style></style>
+  css.type = 'text/css'; // Specifies the type
+  if (css.styleSheet) css.styleSheet.cssText = rule; // Support for IE
+  else css.appendChild(document.createTextNode(rule)); // Support for the rest
+  document.getElementsByTagName("head")[0].appendChild(css); // Specifies where to place the css
+}
