@@ -477,7 +477,7 @@ h3 {
 
   .nav-label {
     position: absolute;
-    top: 33%; //TODO fix vertical alignment
+    top: calc(50% - 25px); //TODO fix vertical alignment
     left: 0;
     display: table;
     width: 100%;
@@ -538,10 +538,11 @@ h3 {
       width: 40%;
     }
     .nav-button:nth-child(n+2){
-      position: relative;
-      left: auto;
-      top: auto;
-      margin-left: -40.6%;
+      display: none;
+      // position: relative;
+      // left: auto;
+      // top: auto;
+      // margin-left: -40.6%;
     }
   }
 
@@ -788,7 +789,7 @@ section {
   }
 
   @media (min-width: $breakpoint-tablet) {
-      padding: 30px 30px 10% 30px;
+      // padding: 30px 30px 10% 30px;
 
       .close.button {
         display: none;
@@ -880,7 +881,7 @@ section {
 
   .project-content {
     display: none;
-    height: calc(100% - 100px);
+    height: 100%;
     padding: 0 30px;
 
     opacity: 0;

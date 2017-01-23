@@ -375,7 +375,7 @@ $(document).ready(function() {
 				$navControls.css('top', '0');
 				$nav.css('top', '0');
 				//$(this.SELECTORS.nav.buttons.labels).css('top', this.originalArrowSpacing);
-				$(this.SELECTORS.nav.buttons.labels).css('top', '33%');
+				$(this.SELECTORS.nav.buttons.labels).css('top', 'calc(50% - 25px)');
 		},
 
     onScroll: function($element) {
