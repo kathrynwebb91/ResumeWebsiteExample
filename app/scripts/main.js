@@ -388,7 +388,11 @@ $(document).ready(function() {
 				var rule  = '@media (min-width: 780px) { #project-grid li {padding-bottom: 21.6% !important;}}';
 				rule += '@media (min-width: 780px) {#project-grid li:nth-child(5n+5), #project-grid li:nth-child(5n+6), #project-grid li:nth-child(5n+7) {margin-bottom: -21.4% !important;}}';
 				rule += '@media (min-width: 1000px) {#project-grid li:nth-child(5n+5), #project-grid li:nth-child(5n+6), #project-grid li:nth-child(5n+7) {margin-bottom: -21.5% !important;}}';
-
+				rule += '.loading-screen .loading-hex .hexagon.inner {width: 115px !important;}';
+				rule += '.loading-screen .loading-hex .hexagon.inner div:first-child {border-right-width: 28px !important;}';
+				rule += '.loading-screen .loading-hex .hexagon.inner div:nth-child(2) {width: 58px !important;}';
+				rule += '.loading-screen .loading-hex .hexagon.inner div:last-child {border-left-width: 28px !important;}';
+				rule += '@media (max-width: 780px) AND (min-width: 420px){ .nav-button:nth-child(n+2) {margin-left: -40.5% !important;}}';
 				cssEngine(rule);
 			}
 
