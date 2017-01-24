@@ -328,9 +328,13 @@ h3 {
         transform: rotateX(-180deg);
         right: auto;
         
-        width: 115.4px;
-        left: -62px;
-        margin: 2px;
+        //width: 115.4px;
+        //left: -62px;
+        //margin: 2px;
+
+        width: 114px;
+        left: -60px;
+        margin: 2px 3px;
 
         div:first-child {
           border-right-color: $black;
@@ -551,18 +555,19 @@ h3 {
     .nav-button {
       position: relative;
       left: auto;
-      top: auto;
+      top: 0;
       width: 25%;
     }
 
     .nav-button:nth-child(1){
-      margin-right: 12.3%;
+      //margin-right: 12.3%;
+      margin-right: 12.5%;
     }
 
     .nav-button:last-child{
       position: relative;
       left: auto;
-      top: auto;
+      top: 0;
       margin-left: 0;
     }
 
