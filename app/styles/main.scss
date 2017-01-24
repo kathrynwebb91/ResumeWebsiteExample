@@ -192,7 +192,7 @@ h1 {
   line-height: 100%;
 
   @media (min-width: $breakpoint-mobile) {
-    font-size: 300%;   
+    font-size: 300%;
   }
 
   @media (min-width: $breakpoint-tablet) {
@@ -327,7 +327,7 @@ h3 {
       &.inner {
         transform: rotateX(-180deg);
         right: auto;
-        
+
         //width: 115.4px;
         //left: -62px;
         //margin: 2px;
@@ -389,6 +389,15 @@ h3 {
   height: 100%;
   background: url('../images/background.jpg') no-repeat center top;
   background-size: cover;
+
+  // SR
+  opacity: 0;
+}
+
+// SR
+.loaded .main-container {
+  opacity: 1;
+
 }
 
 /* NAVIGATION ******************************/
