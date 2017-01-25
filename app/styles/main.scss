@@ -2,7 +2,7 @@
 // endbower
 
 $breakpoint-desktop: 1080px;
-$breakpoint-tablet: 780px;
+$breakpoint-tablet: 850px;
 $breakpoint-mobile: 420px;
 
 $black: #222;
@@ -895,7 +895,6 @@ section {
 
   .project-content {
     display: none;
-    height: 100%;
     padding: 0 30px;
 
     opacity: 0;
@@ -923,37 +922,6 @@ section {
     display: inline-block;
   }
 
-  @media (min-width: $breakpoint-desktop) {
-    .project-content {
-      padding-top: 14% !important;
-    }
-  }
-
-  @media (min-width: $breakpoint-tablet){
-
-    .content .project-content {
-      padding-top: 16% !important;
-      height: 87%;
-
-      .close.button {
-        display: none;
-      }
-    }
-
-    .img-container {
-      width: 100%;
-      .half-width {
-        width: 50%;
-      }
-    }
-
-   .content .project-content > div:not(.img-container):not(.line){
-        padding: 0 100px !important;
-    }
-
-  }
-
-
   @media (min-width: $breakpoint-mobile) {
 
     iframe {
@@ -969,6 +937,30 @@ section {
         //margin-bottom: $bigmargin;
         padding: 0 50px;
     }
+  }
+
+  @media (min-width: $breakpoint-tablet){
+
+    .content .project-content {
+      padding-top: 16% !important;
+      height: 84%;
+
+      .close.button {
+        display: none;
+      }
+    }
+
+    .img-container {
+      width: 100%;
+      .half-width {
+        width: 50%;
+      }
+    }
+
+   .content .project-content > div:not(.img-container):not(.line):not(:last-child){
+        padding: 0 100px !important;
+    }
+
   }
 
 }
